@@ -1,66 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<div align="center">
+<img src="https://www.google.com/search?q=https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%2520SVG/2%2520CMYK/1%2520Full%2520Color/laravel-logolockup-cmyk-red.svg" width="250" alt="Laravel Logo">
+<h1><b>Sistem Manajemen Konferensi LONTARA 2025</b></h1>
+<p>Aplikasi web komprehensif untuk mengelola seluruh alur kerja konferensi ilmiah dari pendaftaran hingga pasca-acara.</p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<p>
+<a href="#fitur-utama"><strong>Fitur</strong></a> •
+<a href="#tumpukan-teknologi"><strong>Teknologi</strong></a> •
+<a href="#panduan-instalasi"><strong>Instalasi</strong></a> •
+<a href="#lisensi"><strong>Lisensi</strong></a>
 </p>
 
-## About Laravel
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+📖 Tentang Proyek
+LONTARA 2025 adalah aplikasi web yang dibangun menggunakan Laravel 11 untuk menyediakan solusi manajemen konferensi yang lengkap. Aplikasi ini dirancang untuk menangani semua kebutuhan, mulai dari halaman pendaftaran yang menarik bagi peserta hingga panel administrasi yang kuat untuk panitia, memastikan alur kerja yang efisien dan pengalaman pengguna yang mulus.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+✨ Fitur Utama
+Aplikasi ini memiliki fungsionalitas yang kaya, terbagi menjadi dua peran utama: Peserta dan Admin.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+👤 Untuk Peserta
+👤 Profil Pengguna: Membuat akun, login, dan memperbarui informasi profil pribadi, termasuk foto avatar dengan fitur crop.
 
-## Learning Laravel
+** inteligente Alur Pendaftaran Cerdas (Stateful):** Sistem memandu pengguna berdasarkan progres mereka:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+📝 Mengisi formulir pendaftaran konferensi.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+💳 Mengunggah bukti pembayaran.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+✅ Melihat halaman status "Selamat Datang" setelah pembayaran diverifikasi.
 
-## Laravel Sponsors
+📄 Submission Paper: Antarmuka khusus bagi "Presenter" untuk mengunggah makalah/abstrak.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+📧 Notifikasi Email: Menerima email otomatis untuk status pembayaran dan status paper.
 
-### Premium Partners
+🌐 Halaman Publik Dinamis: Mengakses informasi terbaru tentang tanggal penting dan keynote speakers.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+🛠️ Untuk Admin
+📊 Dashboard Dinamis: Panel utama yang menampilkan statistik kunci secara real-time (total peserta, paper masuk, pembayaran menunggu verifikasi).
 
-## Contributing
+👥 Manajemen Peserta:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Melihat daftar lengkap semua peserta.
 
-## Code of Conduct
+🔍 Pencarian & Filter: Mencari peserta berdasarkan nama/email dan memfilter berdasarkan status pembayaran.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+📤 Ekspor ke Excel: Mengunduh data peserta (termasuk hasil filter) ke dalam format .xlsx.
 
-## Security Vulnerabilities
+💰 Manajemen Keuangan:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Alur kerja verifikasi pembayaran yang terstruktur: meninjau detail, mencocokkan bukti, lalu Approve atau Reject.
 
-## License
+Melihat riwayat semua transaksi pembayaran.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+✒️ Manajemen Paper:
+
+Melihat dan mengunduh semua paper yang masuk.
+
+Mengubah status paper (Accepted, Rejected, Revision Needed).
+
+💬 Memberikan Feedback: Menulis catatan revisi/penolakan yang akan otomatis terkirim ke email penulis.
+
+📝 Manajemen Konten (CMS):
+
+Mengubah tanggal-tanggal penting di halaman publik tanpa menyentuh kode.
+
+Mengelola Keynote Speakers (Tambah, Edit, Hapus) yang tampil di halaman depan.
+
+📢 Alat Komunikasi (Email Blaster):
+
+Mengirim email massal ke grup peserta tertentu (misal: semua peserta, hanya presenter, atau yang belum lunas) menggunakan sistem antrian (Queue) untuk performa yang andal.
+
+🚀 Tumpukan Teknologi
+Kategori
+
+Teknologi
+
+Backend
+
+Laravel 11, PHP 8.2
+
+Frontend
+
+Blade, Tailwind CSS, Alpine.js
+
+Database
+
+MySQL
+
+Otentikasi
+
+Laravel Breeze
+
+Tools
+
+Maatwebsite/Excel, Intervention/Image, Cropper.js
+
+⚙️ Panduan Instalasi
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal Anda.
+
+1. Clone Repositori
+git clone [URL_REPOSITORI_ANDA]
+cd lontara-2025
+
+2. Instal Dependensi
+composer install
+npm install
+
+3. Konfigurasi Environment
+Salin file .env.example menjadi .env.
+
+cp .env.example .env
+
+Buat kunci aplikasi baru.
+
+php artisan key:generate
+
+Atur koneksi database Anda di file .env (DB_DATABASE, DB_USERNAME, DB_PASSWORD).
+
+Atur konfigurasi Mailtrap untuk MAIL_* variables.
+
+Ubah QUEUE_CONNECTION menjadi database.
+
+4. Migrasi & Seeding Database
+Penting: Perintah ini akan membuat semua tabel dan mengisi data awal, termasuk akun admin, user dummy, dan pengaturan default.
+
+php artisan migrate:fresh --seed
+
+Akun Admin Default:
+
+Email: admin@lontara.com
+
+Password: password
+
+5. Buat Symbolic Link
+Perintah ini penting agar file yang diunggah (foto, paper, dll.) bisa diakses dari web.
+
+php artisan storage:link
+
+6. Kompilasi Aset Frontend
+npm run dev
+
+7. Jalankan Server
+Buka dua terminal terpisah.
+
+Di terminal pertama, jalankan server pengembangan:
+
+php artisan serve
+
+Di terminal kedua, jalankan worker untuk antrian email:
+
+php artisan queue:work
