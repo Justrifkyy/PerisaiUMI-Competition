@@ -1,4 +1,3 @@
-{{-- resources/views/pages/home.blade.php --}}
 <x-public-layout>
 
     <!-- 1. Hero Section -->
