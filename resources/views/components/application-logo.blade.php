@@ -1,0 +1,1 @@
+<img src="{{ asset('storage/img/logoLontara.png') }}" alt="LONTARA 2025 Logo" {{ $attributes }}>
