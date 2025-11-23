@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Registration extends Model
 {
@@ -13,30 +14,39 @@ class Registration extends Model
 
     protected $fillable = [
         'user_id',
+        'team_name',
         'full_name',
         'institution',
         'position',
         'phone_number',
         'participant_type',
         'research_field',
-        'identity_card_path',
-        'cv_path',
+        'ktm_path',
+        'share_pamflet_path',
+        'twibbon_path',
+        'follow_medsos_path',
+        'bmc_path',
+        'proposal_path',
         'package_choice',
         'is_present',
         'agree_terms',
     ];
 
-    /**
-     * Mendefinisikan bahwa satu data Registration dimiliki oleh satu User.
-     */
+    // Relasi ke User (Ketua Tim)
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    // Relasi ke Pembayaran
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
     }
-    
+
+    // Relasi ke Penilaian (Scores)
+    public function scores(): HasMany
+    {
+        return $this->hasMany(Score::class);
+    }
 }

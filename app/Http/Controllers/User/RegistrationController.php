@@ -50,48 +50,69 @@ class RegistrationController extends Controller
      * Menyimpan data dari form registrasi konferensi.
      * Logika ini tidak berubah.
      */
+    // app/Http/Controllers/User/RegistrationController.php
+
     public function store(Request $request): RedirectResponse
     {
-        // ... (seluruh kode di dalam method store() Anda tetap sama persis)
-        // 1. Validasi semua input
+        // 1. Validasi Input Sesuai Guidebook
         $validated = $request->validate([
-            'full_name' => 'required|string|max:255',
+            // Data Tim
+            'team_name' => 'required|string|max:255',
+            'full_name' => 'required|string|max:255', // Ketua Tim
             'institution' => 'required|string|max:255',
-            'position' => 'required|string|max:255',
             'phone_number' => 'required|string|max:20',
-            'participant_type' => 'required|in:Presenter,Participant',
-            'research_field' => 'nullable|string|max:255',
-            'identity_card' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'cv' => 'nullable|file|mimes:pdf|max:2048',
-            'package_choice' => 'required|string',
+            'participant_type' => 'required|in:Tahap Awal,Tahap Berjalan', // Kategori Lomba
+            'research_field' => 'nullable|string|max:255', // Subtema/Bidang (Opsional)
+
+            // Berkas Lomba (Wajib PDF/Gambar)
+            'ktm' => 'required|file|mimes:pdf|max:5120', // Scan KTM Gabungan
+            'bmc' => 'required|file|mimes:pdf|max:10240', // Business Model Canvas
+            'proposal' => 'required|file|mimes:pdf|max:15360', // Proposal Bisnis
+
+            // Bukti Persyaratan (Gambar)
+            'share_pamflet' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+            'twibbon' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+            'follow_medsos' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Bisa gabungan screenshot
+
+            'package_choice' => 'required|string', // Paket (Lomba/Expo)
             'is_present' => 'accepted',
             'agree_terms' => 'accepted',
         ]);
 
-        // 2. Proses upload file
-        $identityCardPath = $request->file('identity_card')->store('public/identities');
-        $cvPath = null;
-        if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('public/cvs');
-        }
+        // 2. Fungsi Helper untuk Upload File
+        // Biar kodenya rapi, kita upload satu per satu
+        $ktmPath = $request->file('ktm')->store('submissions/identities', 'public');
+        $bmcPath = $request->file('bmc')->store('submissions/docs', 'public');
+        $proposalPath = $request->file('proposal')->store('submissions/docs', 'public');
+        $sharePath = $request->file('share_pamflet')->store('submissions/proofs', 'public');
+        $twibbonPath = $request->file('twibbon')->store('submissions/proofs', 'public');
+        $followPath = $request->file('follow_medsos')->store('submissions/proofs', 'public');
 
-        // 3. Simpan data ke database
+        // 3. Simpan ke Database
         Registration::create([
             'user_id' => Auth::id(),
+            'team_name' => $validated['team_name'],
             'full_name' => $validated['full_name'],
             'institution' => $validated['institution'],
-            'position' => $validated['position'],
+            // 'position' => 'Ketua Tim', // Default otomatis
             'phone_number' => $validated['phone_number'],
             'participant_type' => $validated['participant_type'],
             'research_field' => $validated['research_field'],
-            'identity_card_path' => $identityCardPath,
-            'cv_path' => $cvPath,
+
+            // Simpan Path File
+            'ktm_path' => $ktmPath,
+            'bmc_path' => $bmcPath,
+            'proposal_path' => $proposalPath,
+            'share_pamflet_path' => $sharePath,
+            'twibbon_path' => $twibbonPath,
+            'follow_medsos_path' => $followPath,
+
             'package_choice' => $validated['package_choice'],
             'is_present' => true,
             'agree_terms' => true,
         ]);
 
-        // 4. Redirect ke halaman pembayaran
-        return redirect()->route('payment.create')->with('status', 'Registrasi berhasil! Silakan lanjutkan ke tahap pembayaran.');
+        // 4. Redirect ke Pembayaran
+        return redirect()->route('payment.create')->with('status', 'Pendaftaran tim berhasil! Berkas telah diterima. Silakan lanjutkan ke pembayaran.');
     }
 }

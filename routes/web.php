@@ -16,8 +16,8 @@ use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\Admin\PaperController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\ContentController;
-use App\Http\Controllers\Admin\SpeakerController;       
-use App\Http\Controllers\Admin\CommunicationController; 
+use App\Http\Controllers\Admin\SpeakerController;
+use App\Http\Controllers\Admin\CommunicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +77,17 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     // Komunikasi
     Route::get('/communication', [CommunicationController::class, 'create'])->name('communication.create');
     Route::post('/communication', [CommunicationController::class, 'send'])->name('communication.send');
+
+    // MANAJEMEN AKUN JURI (CRUD User)
+    Route::resource('juris', \App\Http\Controllers\Admin\JuriController::class)->except(['show', 'edit', 'update']);
+});
+
+
+// == HALAMAN PANEL JURI ==
+Route::middleware(['auth', 'verified', 'is_juri'])->prefix('juri')->name('juri.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Juri\JuriController::class, 'index'])->name('dashboard');
+    Route::get('/scoring/{registration}', [App\Http\Controllers\Juri\JuriController::class, 'show'])->name('scoring.show');
+    Route::post('/scoring/{registration}', [App\Http\Controllers\Juri\JuriController::class, 'store'])->name('scoring.store');
 });
 
 

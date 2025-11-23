@@ -31,12 +31,14 @@
             <!-- Settings Dropdown or Login/Register Links -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @auth
-                    <!-- Tombol Khusus untuk ADMIN -->
-                    @if(Auth::user()->is_admin)
-                        <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 mr-4">
-                            Admin Panel
-                        </a>
-                    @endif
+                        @if(Auth::user()->is_admin)
+                    <a href="{{ route('admin.dashboard') }}" class="...">Admin Panel</a>
+    
+                        @elseif(Auth::user()->role === 2) 
+                    <a href="{{ route('juri.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 mr-4">
+                        Panel Juri
+                    </a>
+                 @endif
 
                     <!-- Dropdown Profil Pengguna -->
                     <x-dropdown align="right" width="48">
@@ -124,6 +126,10 @@
             <div class="mt-3 space-y-1">
                  @if(Auth::user()->is_admin)
                     <x-responsive-nav-link :href="route('admin.dashboard')">{{ __('Admin Panel') }}</x-responsive-nav-link>
+                @elseif(Auth::user()->role === 2) 
+                    <x-responsive-nav-link href="{{ route('juri.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 mr-4">
+                        Panel Juri
+                    </x-responsive-nav-link>
                 @endif
                 <!-- ===== LINK STATUS PENDAFTARAN DIHAPUS DARI SINI (MOBILE) ===== -->
                 <x-responsive-nav-link :href="route('profile.edit')">{{ __('Edit Profil') }}</x-responsive-nav-link>

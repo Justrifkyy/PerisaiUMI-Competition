@@ -22,11 +22,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin',
         'avatar',
-        'institution', // <-- Tambahkan ini
-        'position',      // <-- Tambahkan ini
-        'phone_number'
+        'institution',
+        'position',
+        'phone_number',
+        'role', // <-- Ganti is_admin jadi role
     ];
 
     /**
@@ -63,6 +63,16 @@ class User extends Authenticatable
     public function submissions(): HasMany
     {
         return $this->hasMany(Submission::class);
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->role === 1;
+    }
+
+    public function getIsJuriAttribute()
+    {
+        return $this->role === 2;
     }
     
 }

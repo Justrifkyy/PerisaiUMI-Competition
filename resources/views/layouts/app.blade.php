@@ -11,6 +11,11 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+
+    <link rel="icon" href="{{ asset('storage/img/logoLontara.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('storage/img/logoLontara.png') }}" type="image/png">
+
+
     <!-- Cropper.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" />
 
