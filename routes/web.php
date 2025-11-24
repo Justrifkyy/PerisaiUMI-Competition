@@ -80,6 +80,13 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
 
     // MANAJEMEN AKUN JURI (CRUD User)
     Route::resource('juris', \App\Http\Controllers\Admin\JuriController::class)->except(['show', 'edit', 'update']);
+
+    Route::get('/recap', [\App\Http\Controllers\Admin\RecapController::class, 'index'])->name('recap.index');
+
+    // TAMBAHKAN INI:
+    Route::get('/recap/export', [\App\Http\Controllers\Admin\RecapController::class, 'export'])->name('recap.export');
+
+    Route::resource('committees', \App\Http\Controllers\Admin\CommitteeController::class);
 });
 
 

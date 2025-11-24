@@ -14,14 +14,14 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')"> {{ __('Home') }} </x-nav-link>
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')"> {{ __('About') }} </x-nav-link>
-                    <x-nav-link :href="route('important-dates')" :active="request()->routeIs('important-dates')"> {{ __('Important Dates') }} </x-nav-link>
-                    <x-nav-link :href="route('call-for-paper')" :active="request()->routeIs('call-for-paper')"> {{ __('Call For Paper') }} </x-nav-link>
-                    <x-nav-link :href="route('submission-info')" :active="request()->routeIs('submission-info')"> {{ __('Submission Info') }} </x-nav-link>
+                    <x-nav-link :href="route('important-dates')" :active="request()->routeIs('important-dates')"> {{ __('Jadwal') }} </x-nav-link>
+                    <x-nav-link :href="route('call-for-paper')" :active="request()->routeIs('call-for-paper')"> {{ __('Panduan') }} </x-nav-link>
+                    <x-nav-link :href="route('submission-info')" :active="request()->routeIs('submission-info')"> {{ __('Informasi') }} </x-nav-link>
 
                     <!-- ===== LINK BARU UNTUK USER LOGIN ===== -->
                     @auth
                         <x-nav-link :href="route('registration.create')" :active="request()->routeIs('registration.create')">
-                            {{ __('Registrasi Konferensi') }}
+                            {{ __('Registrasi Lomba') }}
                         </x-nav-link>
                     @endauth
                     <!-- ======================================= -->
@@ -104,14 +104,14 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')"> {{ __('Home') }} </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')"> {{ __('About') }} </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('important-dates')" :active="request()->routeIs('important-dates')"> {{ __('Important Dates') }} </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('call-for-paper')" :active="request()->routeIs('call-for-paper')"> {{ __('Call For Paper') }} </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('submission-info')" :active="request()->routeIs('submission-info')"> {{ __('Submission Info') }} </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('important-dates')" :active="request()->routeIs('important-dates')"> {{ __('Jadwal') }} </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('call-for-paper')" :active="request()->routeIs('call-for-paper')"> {{ __('Panduan') }} </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('submission-info')" :active="request()->routeIs('submission-info')"> {{ __('Informasi') }} </x-responsive-nav-link>
              
              <!-- ===== LINK BARU UNTUK USER LOGIN (MOBILE) ===== -->
              @auth
                 <x-responsive-nav-link :href="route('registration.create')" :active="request()->routeIs('registration.create')">
-                    {{ __('Registrasi Konferensi') }}
+                    {{ __('Registrasi Lomba') }}
                 </x-responsive-nav-link>
             @endauth
             <!-- =============================================== -->

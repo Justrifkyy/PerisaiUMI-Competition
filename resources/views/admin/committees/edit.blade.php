@@ -1,10 +1,10 @@
 <x-admin-layout>
     <x-slot name="header">
-        Edit Data Dewan Juri
+        Edit Data Panitia
     </x-slot>
 
     <div class="p-6 bg-white rounded-lg shadow-md">
-        <form action="{{ route('admin.speakers.update', $speaker) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.committees.update', $committee) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <input type="hidden" name="crop_data" id="crop_data">
@@ -13,26 +13,26 @@
                 {{-- Nama --}}
                 <div>
                     <x-input-label for="name" value="Nama Lengkap" />
-                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $speaker->name)" required />
+                    <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $committee->name)" required />
                 </div>
 
                 {{-- Jabatan --}}
                 <div>
-                    <x-input-label for="title" value="Jabatan / Peran" />
-                    <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" :value="old('title', $speaker->title)" required />
+                    <x-input-label for="role" value="Jabatan" />
+                    <x-text-input id="role" name="role" type="text" class="mt-1 block w-full" :value="old('role', $committee->role)" required />
                 </div>
 
-                {{-- Foto --}}
+                {{-- Upload Foto --}}
                 <div>
-                    <x-input-label value="Foto Juri (Biarkan jika tidak ingin mengubah)" />
+                    <x-input-label value="Foto Panitia (Biarkan jika tidak ingin mengubah)" />
                     <div class="mt-2 flex items-center gap-x-4">
                         <div class="h-32 w-32 rounded-full overflow-hidden border-2 border-gray-300 bg-gray-100 flex-shrink-0">
-                            <img id="image-preview" class="h-full w-full object-cover" src="{{ Storage::url($speaker->image_path) }}" alt="Preview">
+                            <img id="image-preview" class="h-full w-full object-cover" src="{{ Storage::url($committee->image_path) }}" alt="Preview">
                         </div>
                         
                         <div>
                             <input type="file" id="image-input" class="hidden" accept="image/*">
-                            <label for="image-input" class="cursor-pointer inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 transition">
+                            <label for="image-input" class="cursor-pointer inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                                 📷 Ganti Foto
                             </label>
                         </div>
@@ -41,26 +41,23 @@
             </div>
 
             <div class="flex items-center justify-end mt-8 border-t pt-4">
-                <a href="{{ route('admin.speakers.index') }}" class="text-sm text-gray-600 hover:text-gray-900 mr-4">Batal</a>
-                <x-primary-button>Update Data</x-primary-button>
+                <a href="{{ route('admin.committees.index') }}" class="text-sm text-gray-600 hover:text-gray-900 mr-4">Batal</a>
+                <x-primary-button>Update Panitia</x-primary-button>
             </div>
         </form>
     </div>
 
-    <div id="cropper-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
-        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="px-6 py-4 border-b flex justify-between items-center">
-                <h3 class="text-lg font-bold text-gray-900">Sesuaikan Potongan Foto</h3>
-                <button type="button" id="close-x" class="text-gray-400 hover:text-gray-500">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
+    <div id="cropper-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50" style="display: none;">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-2xl flex flex-col max-h-[90vh]">
+            <h3 class="text-xl font-bold mb-4 flex-shrink-0">Sesuaikan Potongan Foto</h3>
+            
+            <div class="flex-grow overflow-hidden bg-gray-100">
+                <img id="image-to-crop" src="" class="max-w-full max-h-full block">
             </div>
-            <div class="relative flex-grow bg-gray-900 h-96 sm:h-[500px] w-full overflow-hidden">
-                <img id="image-to-crop" src="" class="block max-w-full" style="max-height: 100%;">
-            </div>
-            <div class="px-6 py-4 border-t bg-gray-50 flex justify-end space-x-3">
-                <button type="button" id="cancel-crop" class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 font-medium shadow-sm">Batal</button>
-                <button type="button" id="confirm-crop" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 font-medium shadow-sm">Potong & Gunakan</button>
+            
+            <div class="mt-4 flex justify-end space-x-2 flex-shrink-0">
+                <button type="button" id="cancel-crop" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Batal</button>
+                <button type="button" id="confirm-crop" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Potong & Gunakan</button>
             </div>
         </div>
     </div>
@@ -73,7 +70,6 @@
             const cropDataInput = document.getElementById('crop_data');
             const confirmBtn = document.getElementById('confirm-crop');
             const cancelBtn = document.getElementById('cancel-crop');
-            const closeXBtn = document.getElementById('close-x');
             let cropper;
 
             imageInput.addEventListener('change', (e) => {
@@ -83,9 +79,11 @@
                     reader.onload = (event) => {
                         imageToCrop.src = event.target.result;
                         modal.style.display = 'flex';
+
                         if (cropper) { cropper.destroy(); }
+
                         cropper = new Cropper(imageToCrop, {
-                            aspectRatio: 1, 
+                            aspectRatio: 1,
                             viewMode: 1,
                             autoCropArea: 0.8,
                             responsive: true,
@@ -111,7 +109,6 @@
             };
 
             cancelBtn.addEventListener('click', closeModal);
-            closeXBtn.addEventListener('click', closeModal);
         });
     </script>
 </x-admin-layout>

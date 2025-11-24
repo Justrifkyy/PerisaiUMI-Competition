@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Setting;
 use App\Models\Speaker;
+use App\Models\Committee; // <-- Tambahkan ini
 
 class PageController extends Controller
 {
@@ -30,13 +31,8 @@ class PageController extends Controller
      */
     public function about(): View
     {
-        // Siapkan data dummy untuk panitia
-        $committee = [
-            ['name' => 'Prof. Dr. Ahmad Fauzi', 'role' => 'Ketua Umum'],
-            ['name' => 'Dr. Siti Nurhaliza', 'role' => 'Sekretaris Konferensi'],
-            ['name' => 'Bambang Supriadi, M.T.', 'role' => 'Bendahara'],
-            ['name' => 'Dr. Ir. Rina Wulandari', 'role' => 'Ketua Komite Ilmiah'],
-        ];
+        // Ambil data panitia dari database
+        $committee = Committee::all();
 
         return view('pages.about', ['committee' => $committee]);
     }
@@ -55,20 +51,8 @@ class PageController extends Controller
      */
     public function callForPaper(): View
     {
-        // Kita buat daftar topik di sini agar mudah dikelola
-        $topics = [
-            'Kecerdasan Buatan (AI) dan Machine Learning',
-            'Keamanan Siber dan Jaringan Komputer',
-            'Internet of Things (IoT) dan Sistem Tertanam',
-            'Pengembangan Perangkat Lunak dan Rekayasa Perangkat Lunak',
-            'Ilmu Data (Data Science) dan Big Data',
-            'Sistem Informasi dan Manajemen',
-            'Teknologi Cloud Computing',
-            'Realitas Virtual (VR) dan Realitas Tambahan (AR)',
-            'Bioinformatika dan Komputasi Biologis',
-        ];
-
-        return view('pages.call-for-paper', ['topics' => $topics]);
+        // Kita tidak butuh data topik lagi karena kontennya sudah spesifik di View
+        return view('pages.call-for-paper');
     }
 
     /**

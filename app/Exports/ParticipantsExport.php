@@ -6,33 +6,32 @@ use App\Models\Registration;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class ParticipantsExport implements FromCollection, WithHeadings, WithMapping
+class ParticipantsExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
 {
     protected $request;
 
-    // Terima request agar bisa filter data yang diekspor
     public function __construct(Request $request)
     {
         $this->request = $request;
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
     public function collection()
     {
-        // Logika query ini sama persis dengan di ParticipantController
         $query = Registration::with('user', 'payment');
 
+        // Logika filter sama dengan Controller
         if ($this->request->has('search') && $this->request->search != '') {
             $searchTerm = $this->request->search;
             $query->where(function ($q) use ($searchTerm) {
-                $q->where('full_name', 'like', '%' . $searchTerm . '%')
-                    ->orWhereHas('user', function ($userQuery) use ($searchTerm) {
-                        $userQuery->where('email', 'like', '%' . $searchTerm . '%');
-                    });
+                $q->where('team_name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('full_name', 'like', '%' . $searchTerm . '%')
+                    ->orWhereHas('user', fn($uq) => $uq->where('email', 'like', '%' . $searchTerm . '%'));
             });
         }
 
@@ -51,37 +50,51 @@ class ParticipantsExport implements FromCollection, WithHeadings, WithMapping
         return $query->latest()->get();
     }
 
-    /**
-     * Mendefinisikan judul kolom di file Excel.
-     */
     public function headings(): array
     {
         return [
-            'Nama Lengkap',
-            'Email',
+            'Nama Tim',
+            'Kategori Lomba',
+            'Ketua Tim',
             'Institusi',
-            'Jabatan',
-            'Nomor Telepon',
-            'Jenis Peserta',
+            'No. WhatsApp',
+            'Email Akun',
             'Status Pembayaran',
             'Tanggal Daftar',
+            'Link Proposal Bisnis', // Kolom Baru
+            'Link BMC',             // Kolom Baru
+            'Link Folder Bukti',    // Kolom Baru
         ];
     }
 
-    /**
-     * Memetakan data dari collection ke format baris Excel.
-     */
     public function map($registration): array
     {
+        // Helper untuk membuat full URL
+        $proposalUrl = $registration->proposal_path ? url(Storage::url($registration->proposal_path)) : '-';
+        $bmcUrl = $registration->bmc_path ? url(Storage::url($registration->bmc_path)) : '-';
+
+        // Kita ambil salah satu bukti saja sebagai referensi
+        $proofUrl = $registration->ktm_path ? url(Storage::url($registration->ktm_path)) : '-';
+
         return [
-            $registration->full_name,
-            $registration->user->email,
-            $registration->institution,
-            $registration->position,
-            $registration->phone_number,
+            $registration->team_name,
             $registration->participant_type,
+            $registration->full_name,
+            $registration->institution,
+            "'" . $registration->phone_number, // Tanda kutip agar Excel membacanya sebagai teks (bukan angka ilmiah)
+            $registration->user->email,
             $registration->payment?->status == 'Verified' ? 'Lunas' : 'Belum Lunas',
-            $registration->created_at->format('d-m-Y'),
+            $registration->created_at->format('d-m-Y H:i'),
+            $proposalUrl,
+            $bmcUrl,
+            $proofUrl
+        ];
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            1 => ['font' => ['bold' => true]], // Header Bold
         ];
     }
 }
