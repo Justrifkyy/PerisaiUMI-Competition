@@ -21,15 +21,19 @@ class Registration extends Model
         'phone_number',
         'participant_type',
         'research_field',
+        // File Paths
         'ktm_path',
         'share_pamflet_path',
         'twibbon_path',
         'follow_medsos_path',
         'bmc_path',
         'proposal_path',
+        // Data Tambahan
         'package_choice',
         'is_present',
         'agree_terms',
+        'nim',
+        'major',
     ];
 
     // Relasi ke User (Ketua Tim)
@@ -38,7 +42,7 @@ class Registration extends Model
         return $this->belongsTo(User::class);
     }
 
-    // Relasi ke Pembayaran
+    // Relasi ke Pembayaran (PENTING)
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
@@ -48,5 +52,11 @@ class Registration extends Model
     public function scores(): HasMany
     {
         return $this->hasMany(Score::class);
+    }
+
+    // Relasi ke Anggota Tim
+    public function teamMembers(): HasMany
+    {
+        return $this->hasMany(TeamMember::class);
     }
 }

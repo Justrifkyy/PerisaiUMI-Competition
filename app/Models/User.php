@@ -55,9 +55,11 @@ class User extends Authenticatable
     /**
      * Mendefinisikan bahwa satu User bisa memiliki banyak data Registration.
      */
-    public function registrations(): HasMany
+    // Tambahkan/Perbaiki method ini di User.php
+    public function registration()
     {
-        return $this->hasMany(Registration::class);
+        // Menggunakan hasOne karena 1 User hanya boleh punya 1 Registrasi Tim
+        return $this->hasOne(Registration::class);
     }
 
     public function submissions(): HasMany
@@ -74,5 +76,4 @@ class User extends Authenticatable
     {
         return $this->role === 2;
     }
-    
 }

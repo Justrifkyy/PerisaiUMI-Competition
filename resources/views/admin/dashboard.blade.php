@@ -1,4 +1,4 @@
-<x-admin-layout>
+{{-- <x-admin-layout>
     <x-slot name="header">
         Dashboard
     </x-slot>
@@ -375,4 +375,165 @@
             }
         });
     </script>
+</x-admin-layout> --}}
+
+<x-admin-layout>
+    <x-slot name="header">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard Admin - Data Peserta') }}
+            </h2>
+            
+            <a href="{{ route('admin.participants.export') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Export Data Excel
+            </a>
+        </div>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative overflow-hidden">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Total Pendaftar</p>
+                            <p class="text-3xl font-black text-gray-800 mt-2">{{ $registrations->total() }}</p>
+                        </div>
+                        <div class="p-3 bg-indigo-50 rounded-lg text-indigo-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Kategori Tahap Awal</p>
+                            <p class="text-3xl font-black text-green-600 mt-2">{{ \App\Models\Registration::where('participant_type', 'Tahap Awal')->count() }}</p>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-lg text-green-600">
+                            <span class="text-2xl">🌱</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Kategori Tahap Berjalan</p>
+                            <p class="text-3xl font-black text-blue-600 mt-2">{{ \App\Models\Registration::where('participant_type', 'Tahap Berjalan')->count() }}</p>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg text-blue-600">
+                            <span class="text-2xl">🚀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6 flex flex-col md:flex-row gap-4">
+                <form action="{{ route('admin.dashboard') }}" method="GET" class="flex-1 flex gap-2">
+                    <input type="text" name="search" placeholder="Cari Nama Tim atau Ketua..." value="{{ request('search') }}" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                    <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700">Cari</button>
+                </form>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Info Tim</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kontak Ketua</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Pembayaran</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelengkapan Berkas</th>
+                                <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse($registrations as $reg)
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-bold text-gray-900">{{ $reg->team_name }}</div>
+                                    <div class="text-xs text-gray-500">{{ $reg->institution }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($reg->participant_type == 'Tahap Awal')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            🌱 Early Stage
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            🚀 Growth Stage
+                                        </span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ $reg->full_name }}</div>
+                                    <div class="text-xs text-gray-500 flex items-center">
+                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                        {{ $reg->phone_number }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($reg->payment && $reg->payment->status == 'verified')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                            Lunas
+                                        </span>
+                                    @elseif($reg->payment)
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 animate-pulse">
+                                            Menunggu Verifikasi
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            Belum Bayar
+                                        </span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex items-center text-xs">
+                                            <span class="w-20 text-gray-500">Proposal:</span>
+                                            @if($reg->proposal_path)
+                                                <span class="text-green-600 font-bold">✔ Ada</span>
+                                            @else
+                                                <span class="text-red-500 font-bold">✘</span>
+                                            @endif
+                                        </div>
+                                        <div class="flex items-center text-xs">
+                                            <span class="w-20 text-gray-500">BMC:</span>
+                                            @if($reg->bmc_path)
+                                                <span class="text-green-600 font-bold">✔ Ada</span>
+                                            @else
+                                                <span class="text-red-500 font-bold">✘</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('admin.registrations.show', $reg->id) }}" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 px-3 py-1 rounded-md transition">
+                                        Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="px-6 py-10 text-center text-gray-500">
+                                    Belum ada data pendaftar.
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="px-6 py-4 border-t border-gray-200">
+                    {{ $registrations->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
 </x-admin-layout>

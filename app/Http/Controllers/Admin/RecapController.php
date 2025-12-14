@@ -7,40 +7,50 @@ use App\Models\Registration;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel; // <-- TAMBAHKAN IMPORT INI
 use App\Exports\RecapExport;
+use Illuminate\View\View;
 
 class RecapController extends Controller
 {
     /**
      * Menampilkan Papan Skor / Leaderboard.
      */
-    public function index()
+    public function index(): View
     {
-        // 1. Ambil semua tim yang sudah bayar (Verified) beserta nilai-nilainya
-        $teams = Registration::whereHas('payment', fn($q) => $q->where('status', 'Verified'))
-            ->with('scores.juri') // Load data skor dan juri yang menilai
-            ->get()
-            ->map(function ($team) {
-                // 2. Hitung Skor Total dari setiap Juri, lalu cari Rata-ratanya
-                $totalScoreAllJuries = 0;
-                $juryCount = $team->scores->count();
+        // Fungsi helper untuk mengambil dan mengolah data tim per kategori
+        $getRankedTeams = function ($category) {
+            return Registration::with('scores') // Ambil relasi nilai
+                ->where('participant_type', $category)
+                // Hanya tim yang sudah bayar lunas yang masuk leaderboard
+                ->whereHas('payment', function ($q) {
+                    $q->where('status', 'verified');
+                })
+                ->get()
+                ->map(function ($team) {
+                    // LOGIKA PENILAIAN DINAMIS:
+                    // Hitung rata-rata hanya dari juri yang SUDAH menilai.
+                    // Jika ada 4 juri, tapi baru 1 yang nilai, pembaginya adalah 1.
 
-                foreach ($team->scores as $score) {
-                    // Total skor per juri (Skala 400 jika masing-masing max 100)
-                    // Atau sesuaikan bobot jika perlu. Di sini kita jumlah murni.
-                    $totalScoreAllJuries += ($score->score_bmc + $score->score_idea + $score->score_impact + $score->score_visual);
-                }
+                    $totalScore = $team->scores->sum('total_score'); // Total poin masuk
+                    $juryCount = $team->scores->count(); // Jumlah juri yang sudah input
 
-                // 3. Hitung Rata-rata Akhir
-                // Jika ada 3 juri, total dibagi 3.
-                $team->final_score = $juryCount > 0 ? ($totalScoreAllJuries / $juryCount) : 0;
-                $team->jury_count = $juryCount;
+                    // Hindari division by zero
+                    $finalScore = $juryCount > 0 ? ($totalScore / $juryCount) : 0;
 
-                return $team;
-            })
-            // 4. Urutkan dari Nilai Tertinggi (Juara 1 di atas)
-            ->sortByDesc('final_score');
+                    $team->final_score = $finalScore;
+                    $team->jury_count = $juryCount;
 
-        return view('admin.recap.index', compact('teams'));
+                    return $team;
+                })
+                // Urutkan dari nilai tertinggi (Desc)
+                ->sortByDesc('final_score')
+                ->values();
+        };
+
+        // Pisahkan data
+        $earlyTeams = $getRankedTeams('Tahap Awal');
+        $growthTeams = $getRankedTeams('Tahap Berjalan');
+
+        return view('admin.recap.index', compact('earlyTeams', 'growthTeams'));
     }
 
     public function export()

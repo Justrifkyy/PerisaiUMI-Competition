@@ -3,70 +3,106 @@
 namespace App\Http\Controllers\Juri;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Registration;
 use App\Models\Score;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class JuriController extends Controller
 {
-    /**
-     * Dashboard Juri: Menampilkan daftar tim yang SIAP dinilai.
-     */
     public function index()
     {
-        // Ambil tim yang pembayarannya SUDAH VERIFIED
-        // Eager load 'scores' untuk mengecek apakah juri ini sudah menilai tim tersebut
-        $teams = Registration::whereHas('payment', function ($q) {
-            $q->where('status', 'Verified');
-        })->with(['scores' => function ($q) {
+        // PERBAIKAN: Menggunakan nama variabel '$teams' agar sesuai dengan View
+        $teams = Registration::with(['payment', 'scores' => function ($q) {
             $q->where('user_id', Auth::id());
-        }])->latest()->get();
+        }])
+            ->whereHas('payment', function ($q) {
+                $q->where('status', 'verified');
+            })
+            ->latest()
+            ->paginate(10);
 
         return view('juri.dashboard', compact('teams'));
     }
 
-    /**
-     * Halaman Penilaian: Form untuk menilai satu tim.
-     */
-    public function show(Registration $registration)
+    public function show($id)
     {
-        // Cek apakah juri sudah pernah menilai tim ini sebelumnya
-        $existingScore = Score::where('user_id', Auth::id())
-            ->where('registration_id', $registration->id)
+        $registration = Registration::findOrFail($id);
+
+        // Ambil nilai juri ini jika sudah ada
+        $existingScore = Score::where('registration_id', $id)
+            ->where('user_id', Auth::id())
             ->first();
 
-        return view('juri.scoring', compact('registration', 'existingScore'));
+        // Ambil kriteria penilaian sesuai kategori lomba
+        $criteria = $this->getCriteria($registration->participant_type);
+
+        return view('juri.scoring', compact('registration', 'criteria', 'existingScore'));
     }
 
-    /**
-     * Simpan Nilai ke Database.
-     */
-    public function store(Request $request, Registration $registration)
+    public function store(Request $request, $id)
     {
-        $request->validate([
-            'score_bmc' => 'required|integer|min:0|max:100',
-            'score_idea' => 'required|integer|min:0|max:100',
-            'score_impact' => 'required|integer|min:0|max:100',
-            'score_visual' => 'required|integer|min:0|max:100',
-            'feedback' => 'nullable|string',
-        ]);
+        $registration = Registration::findOrFail($id);
+        $criteria = $this->getCriteria($registration->participant_type);
 
-        // Gunakan updateOrCreate agar juri bisa mengedit nilai mereka sendiri
+        // 1. Validasi Input Dinamis
+        $rules = [];
+        foreach ($criteria as $key => $item) {
+            $rules["criteria.{$key}"] = 'required|numeric|min:0|max:100';
+        }
+        $rules['feedback'] = 'nullable|string';
+
+        $request->validate($rules);
+
+        // 2. Hitung Total Skor Berdasarkan Bobot
+        $totalScore = 0;
+        $inputScores = $request->input('criteria');
+
+        foreach ($criteria as $key => $item) {
+            $score = $inputScores[$key];
+            $weight = $item['weight'];
+            $totalScore += ($score * ($weight / 100));
+        }
+
+        // 3. Simpan ke Database
         Score::updateOrCreate(
             [
+                'registration_id' => $id,
                 'user_id' => Auth::id(),
-                'registration_id' => $registration->id,
             ],
             [
-                'score_bmc' => $request->score_bmc,
-                'score_idea' => $request->score_idea,
-                'score_impact' => $request->score_impact,
-                'score_visual' => $request->score_visual,
-                'feedback' => $request->feedback,
+                'criteria_scores' => $inputScores,
+                'total_score' => $totalScore,
+                'feedback' => $request->input('feedback'),
             ]
         );
 
-        return redirect()->route('juri.dashboard')->with('success', 'Penilaian untuk tim ' . $registration->team_name . ' berhasil disimpan.');
+        return redirect()->route('juri.dashboard')->with('status', 'Penilaian berhasil disimpan!');
+    }
+
+    // Helper: Definisi Kriteria & Bobot
+    private function getCriteria($type)
+    {
+        if ($type == 'Tahap Awal') {
+            return [
+                'latar_belakang' => ['label' => 'Latar Belakang Masalah', 'weight' => 10],
+                'tujuan_bisnis' => ['label' => 'Tujuan Bisnis (Noble Purpose)', 'weight' => 10],
+                'deskripsi_produk' => ['label' => 'Deskripsi Produk/Karya', 'weight' => 20],
+                'rencana_pemasaran' => ['label' => 'Rencana Pemasaran', 'weight' => 20],
+                'proyeksi_keuangan' => ['label' => 'Proyeksi Keuangan', 'weight' => 20],
+                'analisis_risiko' => ['label' => 'Analisis Risiko (SWOT)', 'weight' => 10],
+                'komposisi_tim' => ['label' => 'Komposisi Tim', 'weight' => 5],
+                'orisinalitas' => ['label' => 'Orisinalitas Ide', 'weight' => 5],
+            ];
+        } else {
+            // Tahap Berjalan
+            return [
+                'manajerial' => ['label' => 'Manajerial & Kewirausahaan', 'weight' => 15],
+                'inovasi_teknologi' => ['label' => 'Inovasi & Teknologi', 'weight' => 50],
+                'lingkungan' => ['label' => 'Dampak Lingkungan (SDGs)', 'weight' => 10],
+                'tenaga_kerja' => ['label' => 'Penyerapan Tenaga Kerja', 'weight' => 10],
+                'pertumbuhan' => ['label' => 'Potensi Pertumbuhan', 'weight' => 15],
+            ];
+        }
     }
 }

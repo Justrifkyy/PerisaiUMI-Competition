@@ -9,16 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    // ... file: database/migrations/xxxx_xx_xx_xxxxxx_create_payments_table.php
-
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('team_members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('registration_id')->constrained()->onDelete('cascade');
-            $table->decimal('amount', 10, 2);
-            $table->string('proof_path'); // <--- TAMBAHKAN BARIS INI
-            $table->string('status')->default('pending'); // pending, verified, rejected
+            $table->string('name');
+            $table->string('nim');
+            $table->string('major'); // Prodi/Jurusan
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('team_members');
     }
 };

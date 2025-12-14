@@ -16,33 +16,31 @@ class RegistrationController extends Controller
      * Menampilkan halaman yang sesuai berdasarkan status pendaftaran user.
      * Ini adalah "pintu gerbang" utama bagi user yang sudah login.
      */
-    public function create(): View|RedirectResponse
+    public function create()
     {
         $user = Auth::user();
-        $registration = $user->registrations()->with('payment')->first();
+        // Ambil data registrasi beserta pembayarannya
+        $registration = $user->registration()->with('payment')->first();
 
-        // KASUS 1: User belum pernah mendaftar sama sekali.
+        // KONDISI 1: Belum pernah daftar sama sekali
         if (!$registration) {
-            // Tampilkan form pendaftaran kosong.
             return view('user.registration-form');
         }
 
-        // KASUS 2: User sudah mendaftar, tapi pembayaran belum LUNAS.
-        if (!$registration->payment || $registration->payment->status !== 'Verified') {
-            // Paksa user ke halaman pembayaran. Tidak boleh isi form lagi.
-            return redirect()->route('payment.create')->with('info', 'Anda sudah terdaftar. Silakan selesaikan pembayaran Anda.');
+        // KONDISI 2: Sudah daftar, tapi belum ada data pembayaran sama sekali
+        if (!$registration->payment) {
+            return redirect()->route('payment.create');
         }
 
-        // KASUS 3: User sudah mendaftar DAN sudah LUNAS.
-        // Tampilkan halaman "Selamat Datang" dan form paper jika dia presenter.
-        $submissions = collect(); // Default collection kosong
-        if ($registration->participant_type == 'Presenter') {
-            $submissions = $user->submissions()->latest()->get();
+        // KONDISI 3: Sudah bayar, tapi statusnya Masih Pending atau Ditolak
+        if (in_array($registration->payment->status, ['pending', 'rejected'])) {
+            return redirect()->route('registration.status');
         }
 
+        // KONDISI 4: Sudah Lunas (Verified) -> Tampilkan Halaman Sukses
+        // Ini sesuai permintaan Anda: kembali ke route ini tapi tampilannya beda
         return view('user.registration-complete', [
-            'registration' => $registration,
-            'submissions' => $submissions,
+            'registration' => $registration
         ]);
     }
 
@@ -54,33 +52,42 @@ class RegistrationController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        // 1. Validasi Input Sesuai Guidebook
+        // 1. Validasi Input
         $validated = $request->validate([
-            // Data Tim
+            // Data Tim & Ketua
             'team_name' => 'required|string|max:255',
-            'full_name' => 'required|string|max:255', // Ketua Tim
+            'full_name' => 'required|string|max:255',
             'institution' => 'required|string|max:255',
             'phone_number' => 'required|string|max:20',
-            'participant_type' => 'required|in:Tahap Awal,Tahap Berjalan', // Kategori Lomba
-            'research_field' => 'nullable|string|max:255', // Subtema/Bidang (Opsional)
+            'participant_type' => 'required|in:Tahap Awal,Tahap Berjalan',
+            'research_field' => 'nullable|string|max:255',
 
-            // Berkas Lomba (Wajib PDF/Gambar)
-            'ktm' => 'required|file|mimes:pdf|max:5120', // Scan KTM Gabungan
-            'bmc' => 'required|file|mimes:pdf|max:10240', // Business Model Canvas
-            'proposal' => 'required|file|mimes:pdf|max:15360', // Proposal Bisnis
+            // Data Tambahan Ketua (PENTING)
+            'nim' => 'required|string|max:50',
+            'major' => 'required|string|max:255',
 
-            // Bukti Persyaratan (Gambar)
-            'share_pamflet' => 'required|file|mimes:jpg,jpeg,png|max:2048',
-            'twibbon' => 'required|file|mimes:jpg,jpeg,png|max:2048',
-            'follow_medsos' => 'required|file|mimes:jpg,jpeg,png|max:5120', // Bisa gabungan screenshot
+            // Data Anggota (Array)
+            'members' => 'required|array|min:2|max:4',
+            'members.*.name' => 'required|string|max:255',
+            'members.*.nim' => 'required|string|max:50',
+            'members.*.major' => 'required|string|max:255',
 
-            'package_choice' => 'required|string', // Paket (Lomba/Expo)
+            // Berkas Lomba
+            'ktm' => 'required|file|mimes:pdf|max:5120',
+            'bmc' => 'required|file|mimes:pdf|max:10240',
+            'proposal' => 'required|file|mimes:pdf|max:15360',
+
+            // Bukti Persyaratan
+            'share_pamflet' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'twibbon' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'follow_medsos' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+
+            // Checkbox
             'is_present' => 'accepted',
             'agree_terms' => 'accepted',
         ]);
 
-        // 2. Fungsi Helper untuk Upload File
-        // Biar kodenya rapi, kita upload satu per satu
+        // 2. Upload File
         $ktmPath = $request->file('ktm')->store('submissions/identities', 'public');
         $bmcPath = $request->file('bmc')->store('submissions/docs', 'public');
         $proposalPath = $request->file('proposal')->store('submissions/docs', 'public');
@@ -88,18 +95,26 @@ class RegistrationController extends Controller
         $twibbonPath = $request->file('twibbon')->store('submissions/proofs', 'public');
         $followPath = $request->file('follow_medsos')->store('submissions/proofs', 'public');
 
-        // 3. Simpan ke Database
-        Registration::create([
+        // 3. Simpan Data Registrasi (Tim & Ketua)
+        $registration = Registration::create([
             'user_id' => Auth::id(),
             'team_name' => $validated['team_name'],
-            'full_name' => $validated['full_name'],
+            'full_name' => $validated['full_name'], // Ketua
             'institution' => $validated['institution'],
-            // 'position' => 'Ketua Tim', // Default otomatis
+
+            // --- PERBAIKAN UTAMA: Masukkan Position secara Hardcode ---
+            'position' => 'Ketua Tim',
+            // ---------------------------------------------------------
+
             'phone_number' => $validated['phone_number'],
             'participant_type' => $validated['participant_type'],
             'research_field' => $validated['research_field'],
 
-            // Simpan Path File
+            // Simpan NIM & Major Ketua (Dari input, bukan Auth::user)
+            'nim' => $validated['nim'],
+            'major' => $validated['major'],
+
+            // Path File
             'ktm_path' => $ktmPath,
             'bmc_path' => $bmcPath,
             'proposal_path' => $proposalPath,
@@ -107,12 +122,16 @@ class RegistrationController extends Controller
             'twibbon_path' => $twibbonPath,
             'follow_medsos_path' => $followPath,
 
-            'package_choice' => $validated['package_choice'],
+            'package_choice' => 'Lomba Kewirausahaan', // Hardcode
             'is_present' => true,
             'agree_terms' => true,
         ]);
 
-        // 4. Redirect ke Pembayaran
-        return redirect()->route('payment.create')->with('status', 'Pendaftaran tim berhasil! Berkas telah diterima. Silakan lanjutkan ke pembayaran.');
+        // 4. Simpan Data Anggota Tim
+        foreach ($validated['members'] as $memberData) {
+            $registration->teamMembers()->create($memberData);
+        }
+
+        return redirect()->route('payment.create')->with('status', 'Pendaftaran tim berhasil! Silakan lanjutkan pembayaran.');
     }
 }

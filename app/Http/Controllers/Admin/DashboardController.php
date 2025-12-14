@@ -3,30 +3,39 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Registration;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use App\Models\Registration; // <-- Import Model
-use App\Models\Submission;   // <-- Import Model
-use App\Models\Payment;      // <-- Import Model
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index()
     {
-        // 1. Hitung total peserta yang sudah melengkapi registrasi
-        $totalParticipants = Registration::count();
+        // Ambil data registrasi beserta relasinya (User, Payment, Anggota Tim)
+        $registrations = Registration::with(['user', 'payment', 'teamMembers'])
+            ->latest()
+            ->paginate(10);
 
-        // 2. Hitung total paper yang sudah di-submit
-        $totalSubmissions = Submission::count();
+        return view('admin.dashboard', compact('registrations'));
+    }
 
-        // 3. Hitung total pembayaran yang masih menunggu verifikasi
-        $pendingPayments = Payment::where('status', 'Pending Verification')->count();
+    // Method baru untuk melihat detail lengkap satu tim
+    public function show($id)
+    {
+        $registration = Registration::with(['user', 'payment', 'teamMembers'])->findOrFail($id);
 
-        // 4. Kirim semua data ke view
-        return view('admin.dashboard', [
-            'totalParticipants' => $totalParticipants,
-            'totalSubmissions' => $totalSubmissions,
-            'pendingPayments' => $pendingPayments,
-        ]);
+        return view('admin.registrations.show', compact('registration'));
+    }
+
+    // Method untuk verifikasi pembayaran (jika belum ada)
+    public function verifyPayment($id)
+    {
+        $registration = Registration::findOrFail($id);
+
+        if ($registration->payment) {
+            $registration->payment->update(['status' => 'verified']);
+            // Opsional: Kirim email notifikasi ke peserta
+        }
+
+        return redirect()->back()->with('success', 'Pembayaran berhasil diverifikasi!');
     }
 }

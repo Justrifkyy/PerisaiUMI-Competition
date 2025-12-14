@@ -4,30 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo; // <-- Import BelongsTo
 
 class Score extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'registration_id',
-        'score_bmc',
-        'score_idea',
-        'score_impact',
-        'score_visual',
+        'user_id',
+        'criteria_scores',
+        'total_score',
         'feedback',
     ];
 
-    // Relasi ke Juri
-    public function juri()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    protected $casts = [
+        'criteria_scores' => 'array',
+    ];
 
-    // Relasi ke Tim Peserta
-    public function registration()
+    // Relasi ke Tim
+    public function registration(): BelongsTo
     {
         return $this->belongsTo(Registration::class);
     }
+
+    // Relasi ke Juri (User)
+    // PERBAIKAN: Tambahkan method ini agar 'with(scores.juri)' berfungsi
+    public function juri(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id'); // user_id adalah foreign key ke tabel users
+    }
+
+    // Opsional: Jika Anda sudah punya method user(), biarkan saja.
+    // Tapi pastikan controller memanggil nama yang sama.
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 }

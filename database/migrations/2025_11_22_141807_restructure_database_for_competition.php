@@ -31,21 +31,6 @@ return new class extends Migration
             // Hapus kolom lama yang wajib diisi agar tidak error
             $table->dropColumn(['identity_card_path', 'cv_path']);
         });
-
-        // 3. BUAT TABEL SCORES
-        Schema::create('scores', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('registration_id')->constrained()->onDelete('cascade');
-
-            $table->integer('score_bmc');
-            $table->integer('score_idea');
-            $table->integer('score_impact');
-            $table->integer('score_visual');
-
-            $table->text('feedback')->nullable();
-            $table->timestamps();
-        });
     }
 
     public function down(): void

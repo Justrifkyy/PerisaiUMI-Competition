@@ -3,18 +3,20 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Registration;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse; // <-- Import RedirectResponse
 
 class DashboardController extends Controller
 {
-    /**
-     * Redirect user to the main action page.
-     */
-    public function index(): RedirectResponse // <-- Ubah return type
+    public function index()
     {
-        // Langsung arahkan ke halaman registrasi konferensi
-        return redirect()->route('registration.create');
+        // Eager load relasi registration dan payment untuk efisiensi
+        $user = Auth::user()->load(['registration.payment']);
+
+        return view('user.dashboard', [
+            'registration' => $user->registration,
+            'payment' => $user->registration?->payment // Null safe operator
+        ]);
     }
 }

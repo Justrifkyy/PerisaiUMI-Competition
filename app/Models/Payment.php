@@ -13,7 +13,7 @@ class Payment extends Model
     protected $fillable = [
         'registration_id',
         'amount',
-        'payment_proof_path',
+        'proof_path',
         'status',
         'admin_notes',
     ];

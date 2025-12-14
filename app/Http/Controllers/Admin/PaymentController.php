@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Rule;
-use App\Mail\PaymentStatusUpdated;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\PaymentStatusUpdated; // Aktifkan jika mailer sudah siap
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -19,12 +19,14 @@ class PaymentController extends Controller
      */
     public function index(): View
     {
-        $pendingPayments = Payment::with('registration.user')
-            ->where('status', 'Pending Verification')
+        // PERBAIKAN: Hapus where('status', 'pending') agar semua tampil
+        // Kita urutkan agar yang 'pending' muncul paling atas, baru berdasarkan tanggal terbaru
+        $allPayments = Payment::with('registration.user')
+            ->orderByRaw("FIELD(status, 'pending', 'verified', 'rejected')") // Prioritaskan Pending
             ->latest()
-            ->get();
+            ->paginate(10);
 
-        return view('admin.payments.index', ['payments' => $pendingPayments]);
+        return view('admin.payments.index', ['payments' => $allPayments]);
     }
 
     /**
@@ -42,20 +44,29 @@ class PaymentController extends Controller
      */
     public function process(Request $request, Payment $payment): RedirectResponse
     {
+        // Validasi input dari form Admin (pastikan value di form adalah 'verified' atau 'rejected')
         $validated = $request->validate([
-            'status' => ['required', Rule::in(['Verified', 'Rejected'])],
-            'admin_notes' => 'required_if:status,Rejected|nullable|string|max:500',
+            'status' => ['required', Rule::in(['verified', 'rejected'])], // Huruf kecil
+            'admin_notes' => 'nullable|string|max:500', // Note boleh diisi meski verified
         ]);
 
+        // Update Database
         $payment->update([
             'status' => $validated['status'],
             'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
-        Mail::to($payment->registration->user->email)->send(new PaymentStatusUpdated($payment));
+        // Kirim Email (Opsional - Uncomment jika Mailable sudah dibuat)
 
-        // Redirect ke route dengan nama yang benar
-        return redirect()->route('admin.payments.index')->with('success', 'Konfirmasi pembayaran untuk ' . $payment->registration->full_name . ' telah berhasil dikirim.'); // <-- DIUBAH
+        try {
+            Mail::to($payment->registration->user->email)->send(new PaymentStatusUpdated($payment));
+        } catch (\Exception $e) {
+            // Biarkan lanjut meski email gagal
+        }
+
+
+        return redirect()->route('admin.payments.index')
+            ->with('success', 'Status pembayaran berhasil diperbarui menjadi: ' . ucfirst($validated['status']));
     }
 
     /**
@@ -63,10 +74,11 @@ class PaymentController extends Controller
      */
     public function history(): View
     {
+        // PERBAIKAN: Gunakan status lowercase
         $processedPayments = Payment::with('registration.user')
-            ->whereIn('status', ['Verified', 'Rejected'])
+            ->whereIn('status', ['verified', 'rejected'])
             ->latest()
-            ->get();
+            ->paginate(10);
 
         return view('admin.payments.history', ['payments' => $processedPayments]);
     }
@@ -76,11 +88,14 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment): RedirectResponse
     {
-        Storage::delete($payment->payment_proof_path);
+        // PERBAIKAN: Nama kolom di database adalah 'proof_path', bukan 'payment_proof_path'
+        if ($payment->proof_path) {
+            Storage::delete($payment->proof_path);
+        }
 
         $payment->delete();
 
-        // Redirect ke route dengan nama yang benar
-        return redirect()->route('admin.payments.history')->with('success', 'Data pembayaran berhasil dihapus.'); // <-- DIUBAH
+        return redirect()->route('admin.payments.history')
+            ->with('success', 'Data pembayaran berhasil dihapus.');
     }
 }
