@@ -61,11 +61,11 @@ class PageController extends Controller
     public function submissionInfo(): View
     {
         // Siapkan data untuk file template
-        // Path ini mengasumsikan Anda akan meletakkan file template di folder `public/templates/`
+        // Path ini mengasumsikan Anda akan meletakkan file template di folder `public/templates/` 
         $templates = [
             [
-                'name' => 'Template Jurnal (.docx)',
-                'description' => 'Gunakan template ini untuk penulisan jurnal penuh sesuai format standar LONTARA 2025.',
+                'name' => 'Template Proposal (.docx)',
+                'description' => 'Gunakan template ini untuk penulisan proposal penuh sesuai format standar LONTARA 2025.',
                 'url' => asset('templates/LONTARA2025_Paper_Template.docx'), // Contoh URL
                 'downloadable' => true // Kita bisa cek file exist jika perlu
             ],

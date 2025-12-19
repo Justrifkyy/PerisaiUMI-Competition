@@ -547,7 +547,7 @@
                                 <p class="text-xs md:text-sm text-gray-300 font-semibold uppercase tracking-wider">Kriteria Penilaian</p>
                             </div>
                             <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-xl md:rounded-2xl p-4 md:p-6 backdrop-blur-xl">
-                                <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-1 md:mb-2">3-5</div>
+                                <div class="text-3xl md:text-4xl font-black text-yellow-400 mb-1 md:mb-2">2-5</div>
                                 <p class="text-xs md:text-sm text-gray-300 font-semibold uppercase tracking-wider">Anggota per Tim</p>
                             </div>
                         </div>
