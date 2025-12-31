@@ -14,7 +14,6 @@
         <link rel="icon" href="{{ asset('storage/img/logoLontara.png') }}" type="image/png">
         <link rel="shortcut icon" href="{{ asset('storage/img/logoLontara.png') }}" type="image/png">
 
-
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

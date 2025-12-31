@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
-
-
-
-
 class SubmissionController extends Controller
 {
     /**
