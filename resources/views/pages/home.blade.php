@@ -16,15 +16,6 @@
                 
                 <!-- Content -->
                 <div class="w-full lg:w-1/2 space-y-6 md:space-y-8 text-center lg:text-left">
-                    <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 backdrop-blur-xl border border-yellow-500/50 rounded-full">
-                        <span class="relative flex h-3 w-3">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
-                        </span>
-                        <span class="text-yellow-400 font-bold text-xs md:text-sm tracking-wider uppercase">Kompetisi Nasional 2025</span>
-                    </div>
-
                     <!-- Heading -->
                     <div class="space-y-3 md:space-y-4">
                         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight">
@@ -43,7 +34,7 @@
                     
                     <!-- Countdown -->
                     <div id="countdown-timer" class="relative group w-full" data-target-date="{{ $conferenceStartDate }}">
-                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-2xl blur-xl opacity-30 transition-opacity"></div>
                         <div class="relative bg-gradient-to-br from-gray-900 to-black border border-yellow-500/30 rounded-2xl p-6 md:p-8 backdrop-blur-xl">
                             <p class="text-yellow-400 font-bold mb-4 md:mb-6 text-xs md:text-sm uppercase tracking-[0.2em] text-center">Pendaftaran Ditutup Dalam</p>
                             <div class="grid grid-cols-4 gap-3 md:gap-6">
@@ -69,16 +60,15 @@
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4 justify-center lg:justify-start">
-                        <a href="{{ route('register') }}" class="group relative inline-flex items-center justify-center gap-2 px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/50">
+                        <a href="{{ route('register') }}" class="group relative inline-flex items-center justify-center gap-2 px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-xl overflow-hidden transition-all duration-300">
                             <span class="relative z-10 text-base md:text-lg">Daftar Sekarang</span>
-                            <svg class="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="relative z-10 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                             </svg>
-                            <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         </a>
-                        <a href="{{ route('call-for-paper') }}" class="group inline-flex items-center justify-center gap-2 px-8 md:px-10 py-4 md:py-5 bg-transparent border-2 border-yellow-500/50 text-yellow-400 font-bold rounded-xl hover:bg-yellow-500 hover:text-black hover:border-yellow-500 transition-all duration-300 hover:scale-105">
+                        <a href="{{ route('call-for-paper') }}" class="group inline-flex items-center justify-center gap-2 px-8 md:px-10 py-4 md:py-5 bg-transparent border-2 border-yellow-500/50 text-yellow-400 font-bold rounded-xl transition-all duration-300">
                             <span class="text-base md:text-lg">Lihat Panduan</span>
-                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                             </svg>
                         </a>
@@ -90,7 +80,7 @@
                     <div class="relative w-full max-w-xs sm:max-w-sm lg:max-w-lg">
                         <div class="absolute inset-0 bg-yellow-400 rounded-full blur-[80px] md:blur-[100px] opacity-40 animate-pulse"></div>
                         <div class="absolute -inset-4 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full blur-2xl opacity-20"></div>
-                        <img src="{{ asset('storage/img/Maskot_Lontara.png') }}" alt="Maskot LONTARA 2025" class="relative w-full h-auto drop-shadow-2xl transform hover:scale-105 transition-all duration-700 ease-out">
+                        <img src="{{ asset('storage/img/Maskot_Lontara.png') }}" alt="Maskot LONTARA 2025" class="relative w-full h-auto drop-shadow-2xl">
                     </div>
                 </div>
             </div>
@@ -117,8 +107,8 @@
                 <!-- Content Cards -->
                 <div class="space-y-4 md:space-y-6">
                     <div class="group relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 rounded-2xl md:rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500/20 rounded-2xl md:rounded-3xl p-6 md:p-10 backdrop-blur-xl hover:border-yellow-500/40 transition-all duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 rounded-2xl md:rounded-3xl blur-xl opacity-0 transition-opacity"></div>
+                        <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500/20 rounded-2xl md:rounded-3xl p-6 md:p-10 backdrop-blur-xl transition-all duration-300">
                             <p class="text-gray-300 text-base md:text-lg lg:text-xl leading-relaxed">
                                 LONTARA 2025 merupakan <span class="text-yellow-400 font-bold">ajang nasional</span> yang dirancang sebagai titik temu antara <span class="text-yellow-400 font-bold">teknologi, kreativitas, dan kepedulian lingkungan</span>. Kegiatan ini digagas oleh UKM PERISAI Universitas Muslim Indonesia (UMI) dengan semangat bahwa mahasiswa bukan hanya pengguna teknologi, tetapi juga <span class="text-yellow-400 font-bold">pencipta solusi</span>.
                             </p>
@@ -126,8 +116,8 @@
                     </div>
 
                     <div class="group relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 rounded-2xl md:rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500/30 rounded-2xl md:rounded-3xl p-6 md:p-10 backdrop-blur-xl hover:border-yellow-500/50 transition-all duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 rounded-2xl md:rounded-3xl blur-xl opacity-0 transition-opacity"></div>
+                        <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500/30 rounded-2xl md:rounded-3xl p-6 md:p-10 backdrop-blur-xl transition-all duration-300">
                             <div class="flex flex-col sm:flex-row items-start gap-4">
                                 <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center">
                                     <svg class="w-5 h-5 md:w-6 md:h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,67 +135,170 @@
         </div>
     </section>
 
-    <!-- Jury Section -->
-    <section class="relative py-16 md:py-24 lg:py-32 bg-black overflow-hidden">
-        <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900"></div>
-            <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(234, 179, 8, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 179, 8, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    <!-- REFINED Juri & Narasumber Section -->
+    <section class="relative py-20 md:py-32 overflow-hidden bg-[#0a0e1a]">
+        <!-- Dramatic Background Effects -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 left-1/4 w-[800px] h-[800px] bg-yellow-500/5 rounded-full blur-[150px] animate-pulse-slow"></div>
+            <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-yellow-400/5 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 2s;"></div>
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(234,179,8,0.1) 35px, rgba(234,179,8,0.1) 36px);"></div>
         </div>
 
-        <div class="container mx-auto px-4 sm:px-6 relative z-10">
-            <!-- Header -->
-            <div class="text-center mb-12 md:mb-20">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4">
-                    <span class="text-gray-100">Dewan Juri &</span>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600"> Narasumber</span>
-                </h2>
-                <div class="w-24 md:w-32 h-1.5 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto rounded-full"></div>
-            </div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
-            <!-- Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-                @forelse($speakers as $speaker)
-                <div class="group relative">
-                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl md:rounded-3xl blur-xl opacity-0 group-hover:opacity-30 transition-all duration-500"></div>
-                    <div class="relative bg-gradient-to-br from-gray-900 to-gray-800 border border-yellow-500/20 rounded-2xl md:rounded-3xl p-6 md:p-8 backdrop-blur-xl hover:border-yellow-500/60 transition-all duration-300 transform hover:-translate-y-2 h-full">
-                        <div class="flex flex-col items-center text-center space-y-4 md:space-y-6">
-                            <!-- Image -->
-                            <div class="relative">
-                                <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"></div>
-                                <div class="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-yellow-500 shadow-2xl transform group-hover:scale-110 transition-transform duration-500">
-                                    <img src="{{ Storage::url($speaker->image_path) }}" alt="{{ $speaker->name }}" class="w-full h-full object-cover">
+            @if($narasumbers->count() > 0 || $juris->count() > 0)
+            
+            <!-- Two Column Layout -->
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 xl:gap-34">
+                
+                <!-- ===================================== -->
+                <!-- LEFT: SPEAKERS (2 persons) -->
+                <!-- ===================================== -->
+                @if($narasumbers->count() > 0)
+                <div class="space-y-10">
+                    
+                    <!-- Section Header -->
+                    <div class="flex items-center justify-between mb-10">
+                        <div>
+                            <p class="text-yellow-500/60 text-xs font-bold uppercase tracking-[0.3em] mb-2 font-mono">Featured</p>
+                            <h2 class="text-4xl md:text-5xl xl:text-6xl font-black text-white leading-none tracking-tight">
+                                Speaker<span class="text-yellow-500">.</span>
+                            </h2>
+                        </div>
+                        <div class="hidden md:block w-20 h-1 bg-gradient-to-r from-yellow-500 to-transparent"></div>
+                    </div>
+
+                    <!-- Speaker Cards -->
+                    <div class="space-y-10">
+                        @foreach($narasumbers as $index => $speaker)
+                        <article class="relative bg-gradient-to-br from-[#141824] to-[#0d1117] rounded-2xl overflow-hidden border border-white/5" style="animation: fadeInUp 0.6s ease-out {{ $index * 0.15 }}s backwards;">
+                            
+                            <!-- Subtle Glow -->
+                            <div class="absolute -inset-2 bg-gradient-to-br from-yellow-500/8 via-transparent to-transparent rounded-2xl blur-xl"></div>
+                            
+                            <!-- Content -->
+                            <div class="relative p-6 md:p-8">
+                                <div class="flex items-center gap-6">
+                                    
+                                    <!-- Photo with Badge Frame -->
+                                    <div class="relative flex-shrink-0">
+                                        <div class="w-28 h-28 md:w-32 md:h-32 rounded-2xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 p-[2px]">
+                                            <div class="w-full h-full rounded-2xl overflow-hidden">
+                                                <img src="{{ Storage::url($speaker->image_path) }}" 
+                                                     alt="{{ $speaker->name }}" 
+                                                     class="w-full h-full object-cover">
+                                            </div>
+                                        </div>
+                                        <!-- Corner Accents -->
+                                        <div class="absolute -top-1 -left-1 w-5 h-5 border-t-2 border-l-2 border-yellow-500/40"></div>
+                                        <div class="absolute -bottom-1 -right-1 w-5 h-5 border-b-2 border-r-2 border-yellow-500/40"></div>
+                                    </div>
+                                    
+                                    <!-- Info -->
+                                    <div class="flex-1 space-y-2">
+                                        <h3 class="text-2xl md:text-3xl font-extrabold text-white leading-tight">
+                                            {{ $speaker->name }}
+                                        </h3>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <div class="w-8 h-[2px] bg-yellow-500/60"></div>
+                                            <span class="text-xs text-yellow-500/80 font-semibold uppercase tracking-widest">Keynote Speaker</span>
+                                        </div>
+                                        <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+                                            {{ $speaker->title }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <!-- Info -->
-                            <div class="space-y-2">
-                                <h3 class="text-xl md:text-2xl font-black text-gray-100 group-hover:text-yellow-400 transition-colors">
-                                    {{ $speaker->name }}
-                                </h3>
-                                <p class="text-yellow-400 font-semibold text-xs md:text-sm">{{ $speaker->title }}</p>
-                            </div>
+                            <!-- Bottom Line -->
+                            <div class="h-[2px] bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent"></div>
+                        </article>
+                        @endforeach
+                    </div>
+                    
+                </div>
+                @endif
+
+                <!-- ===================================== -->
+                <!-- RIGHT: JUDGES (3 persons) -->
+                <!-- ===================================== -->
+                @if($juris->count() > 0)
+                <div class="space-y-8">
+                    
+                    <!-- Section Header -->
+                    <div class="flex items-center justify-between mb-10">
+                        <div class="hidden md:block w-20 h-1 bg-gradient-to-l from-yellow-500 to-transparent"></div>
+                        <div class="text-right ml-auto">
+                            <p class="text-yellow-500/60 text-xs font-bold uppercase tracking-[0.3em] mb-2 font-mono">Panel of Experts</p>
+                            <h2 class="text-4xl md:text-5xl xl:text-6xl font-black text-white leading-none tracking-tight">
+                                Judges<span class="text-yellow-500">.</span>
+                            </h2>
                         </div>
                     </div>
-                </div>
-                @empty
-                <div class="col-span-full flex justify-center py-12 md:py-16">
-                    <div class="relative group max-w-2xl w-full">
-                        <div class="absolute inset-0 bg-yellow-500/20 rounded-2xl blur-xl"></div>
-                        <div class="relative flex flex-col sm:flex-row items-center gap-4 px-6 md:px-8 py-6 bg-gradient-to-r from-gray-900 to-gray-800 border border-yellow-500/30 rounded-2xl backdrop-blur-xl">
-                            <div class="relative flex h-10 w-10 md:h-12 md:w-12 flex-shrink-0">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-50"></span>
-                                <span class="relative inline-flex rounded-full h-full w-full bg-gradient-to-br from-yellow-400 to-yellow-600 items-center justify-center">
-                                    <svg class="w-5 h-5 md:w-6 md:h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
-                                </span>
+
+                    <!-- Judges Grid -->
+                    <div class="space-y-4">
+                        @foreach($juris as $index => $juri)
+                        <div class="relative bg-gradient-to-br from-[#141824] to-[#0d1117] rounded-2xl overflow-hidden border border-white/5" style="animation: fadeInUp 0.5s ease-out {{ ($index * 0.12) + 0.3 }}s backwards;">
+                            
+                            <!-- Subtle Glow -->
+                            <div class="absolute -inset-1 bg-gradient-to-br from-yellow-500/5 to-transparent rounded-2xl blur-lg"></div>
+                            
+                            <!-- Content -->
+                            <div class="relative flex items-center gap-5 p-5 md:p-6">
+                                
+                                <!-- Square Badge Photo -->
+                                <div class="relative flex-shrink-0">
+                                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-gradient-to-br from-yellow-500/10 to-transparent p-[2px]">
+                                        <div class="w-full h-full rounded-xl overflow-hidden">
+                                            <img src="{{ Storage::url($juri->image_path) }}" 
+                                                 alt="{{ $juri->name }}" 
+                                                 class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                    <!-- Corner Accent -->
+                                    <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-yellow-500/30"></div>
+                                </div>
+                                
+                                <!-- Info -->
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="text-lg md:text-xl font-bold text-white leading-tight mb-1">
+                                        {{ $juri->name }}
+                                    </h3>
+                                    <p class="text-sm md:text-base text-gray-400 leading-snug mb-2">
+                                        {{ $juri->title }}
+                                    </p>
+                                    <div class="flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5 text-yellow-500/50" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-xs text-yellow-500/60 font-medium uppercase tracking-wider">Expert Judge</span>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-yellow-400 text-base md:text-xl font-bold text-center sm:text-left">Dewan Juri dan Narasumber akan segera kami umumkan</p>
                         </div>
+                        @endforeach
                     </div>
+                    
                 </div>
-                @endforelse
+                @endif
+
             </div>
+            
+            @endif
+
+            <!-- Empty State -->
+            @if($juris->count() == 0 && $narasumbers->count() == 0)
+                <div class="text-center py-20">
+                    <div class="inline-block p-8 rounded-2xl bg-white/5 border border-white/10">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-yellow-500/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <p class="text-gray-400 text-lg font-medium">Tokoh akan segera diumumkan.</p>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </section>
 
@@ -248,6 +341,7 @@
     @endpush
 
     <style>
+        /* Gradient Animation */
         @keyframes gradient {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -255,6 +349,27 @@
         .animate-gradient {
             background-size: 200% auto;
             animation: gradient 3s ease infinite;
+        }
+        
+        /* Slow Pulse for Ambient Effects */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Staggered Fade In Up Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 

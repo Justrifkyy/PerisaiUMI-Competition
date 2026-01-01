@@ -234,93 +234,162 @@
         </div>
     </div>
 
-    <!-- Committee Section - Creative Grid -->
-    <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
-        <!-- Background Effects -->
-        <div class="absolute inset-0">
-            <div class="absolute top-1/4 right-1/4 w-96 h-96 md:w-[600px] md:h-[600px] bg-yellow-500 rounded-full blur-[200px] opacity-20"></div>
-            <div class="absolute bottom-1/4 left-1/4 w-80 h-80 md:w-[500px] md:h-[500px] bg-yellow-400 rounded-full blur-[150px] opacity-20"></div>
-        </div>
 
-        <div class="container mx-auto px-4 sm:px-6 relative z-10">
-            <div class="max-w-7xl mx-auto">
-                <!-- Section Header -->
-                <div class="text-center mb-12 md:mb-20">
-                    <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 backdrop-blur-xl border border-yellow-500/50 rounded-full mb-4 md:mb-6">
-                        <svg class="w-4 h-4 md:w-5 md:h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                        </svg>
-                        <span class="text-yellow-400 font-bold text-xs md:text-sm tracking-widest uppercase">Our Team</span>
-                    </div>
-                    
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 md:mb-6">
-                        <span class="text-gray-100">Panitia</span>
-                        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mt-2">Penyelenggara</span>
-                    </h2>
 
-                    <p class="text-base md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
-                        Tim solid yang siap menghadirkan pengalaman terbaik untuk Anda
-                    </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Sponsorship & Partnership Section - Compact & Minimal Design -->
+<div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
+    <!-- Minimal Background Effects -->
+    <div class="absolute inset-0">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent"></div>
+    </div>
+
+    <div class="container mx-auto px-4 sm:px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <!-- Clean Section Header -->
+            <div class="text-center mb-12 md:mb-16">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/30 rounded-full mb-6">
+                    <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                    <span class="text-yellow-400 font-semibold text-sm tracking-wider uppercase">Partners</span>
                 </div>
+                
+                <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4">
+                    <span class="text-gray-100">Sponsorship</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mt-2">& Kerja Sama</span>
+                </h2>
 
-                <!-- Committee Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    @foreach($committee as $index => $member)
-                        <div class="group relative" style="animation-delay: {{ $index * 100 }}ms;">
-                            <!-- Hover Glow -->
-                            <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl md:rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-60 transition-all duration-700"></div>
-                            
-                            <!-- Card -->
-                            <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border border-yellow-500/30 rounded-2xl md:rounded-[2rem] p-6 md:p-8 backdrop-blur-xl hover:border-yellow-500/70 transition-all duration-500 hover:-translate-y-3 h-full">
-                                <!-- Image Container -->
-                                <div class="relative mb-4 md:mb-6">
-                                    <!-- Decorative Ring -->
-                                    <div class="absolute inset-0 flex items-center justify-center">
-                                        <div class="w-28 h-28 md:w-36 md:h-36 border-2 border-yellow-500/30 rounded-full group-hover:scale-110 group-hover:border-yellow-500/60 transition-all duration-500"></div>
-                                    </div>
+                <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
+                    Dipercaya oleh brand dan institusi terkemuka
+                </p>
+            </div>
+
+            <!-- Compact Infinite Scroll Container -->
+            <div class="relative mb-16">
+                <!-- Subtle Edge Fades -->
+                <div class="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+
+                <!-- Scrolling Container -->
+                <div class="overflow-hidden py-4">
+                    <div class="flex animate-scroll hover:[animation-play-state:paused] gap-6 md:gap-8">
+                        <!-- First Set -->
+                        @foreach($committee as $member)
+                        <div class="flex-shrink-0">
+                            <div class="group/card relative">
+                                <!-- Compact Card -->
+                                <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 w-44 md:w-52 h-44 md:h-52 flex flex-col items-center justify-center transition-all duration-500 hover:bg-white/10 hover:border-yellow-500/30 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/10">
                                     
-                                    <!-- Image with Glow -->
-                                    <div class="relative flex justify-center">
-                                        <div class="relative">
-                                            <div class="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500"></div>
-                                            <div class="relative h-24 w-24 md:h-32 md:w-32 rounded-full overflow-hidden border-4 border-yellow-500/50 group-hover:border-yellow-400 transition-colors duration-500">
-                                                <img src="{{ Storage::url($member->image_path) }}" alt="{{ $member->name }}" class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                            </div>
-                                        </div>
+                                    <!-- Logo Container - Compact & Centered -->
+                                    <div class="relative flex-1 w-full flex items-center justify-center mb-4">
+                                        <img src="{{ Storage::url($member->image_path) }}" 
+                                             alt="{{ $member->name }}" 
+                                             class="max-w-full max-h-full object-contain filter brightness-90 opacity-70 group-hover/card:brightness-100 group-hover/card:opacity-100 transition-all duration-500"
+                                             style="max-width: 120px; max-height: 80px;">
                                     </div>
 
-                                    <!-- Floating Badge -->
-                                    <div class="absolute -top-2 -right-2 bg-gradient-to-br from-yellow-400 to-yellow-600 text-black font-black text-xs px-2.5 py-1 md:px-3 md:py-1 rounded-full shadow-lg">
-                                        #{{ $index + 1 }}
-                                    </div>
-                                </div>
+                                    <!-- Minimal Divider -->
+                                    <div class="w-8 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent mb-3 group-hover/card:via-yellow-500/80 transition-all duration-500"></div>
 
-                                <!-- Content -->
-                                <div class="text-center space-y-2 md:space-y-3">
-                                    <h3 class="text-lg md:text-xl font-black text-gray-100 group-hover:text-yellow-400 transition-colors duration-300">
+                                    <!-- Title Only - Clean Typography -->
+                                    <h3 class="text-center text-gray-400 font-medium text-xs md:text-sm leading-tight group-hover/card:text-yellow-400 transition-colors duration-300 line-clamp-2">
                                         {{ $member->name }}
                                     </h3>
-                                    
-                                    <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500/20 border border-yellow-500/40 rounded-full">
-                                        <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                                        <p class="text-xs md:text-sm text-yellow-400 font-bold uppercase tracking-wider">
-                                            {{ $member->role }}
-                                        </p>
-                                    </div>
-                                </div>
 
-                                <!-- Decorative Corner -->
-                                <div class="absolute top-3 left-3 md:top-4 md:left-4 w-6 h-6 md:w-8 md:h-8 border-t-2 border-l-2 border-yellow-500/30 group-hover:border-yellow-500/60 transition-colors duration-500"></div>
-                                <div class="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-6 h-6 md:w-8 md:h-8 border-b-2 border-r-2 border-yellow-500/30 group-hover:border-yellow-500/60 transition-colors duration-500"></div>
+                                    <!-- Subtle Glow on Hover -->
+                                    <div class="absolute inset-0 rounded-xl bg-gradient-to-b from-yellow-500/0 via-yellow-500/0 to-yellow-500/0 group-hover/card:from-yellow-500/5 group-hover/card:via-yellow-500/0 group-hover/card:to-yellow-500/5 transition-all duration-500 pointer-events-none"></div>
+                                </div>
                             </div>
                         </div>
-                    @endforeach
+                        @endforeach
+
+                        <!-- Duplicate Set for Seamless Loop -->
+                        @foreach($committee as $member)
+                        <div class="flex-shrink-0">
+                            <div class="group/card relative">
+                                <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 w-44 md:w-52 h-44 md:h-52 flex flex-col items-center justify-center transition-all duration-500 hover:bg-white/10 hover:border-yellow-500/30 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/10">
+                                    <div class="relative flex-1 w-full flex items-center justify-center mb-4">
+                                        <img src="{{ Storage::url($member->image_path) }}" 
+                                             alt="{{ $member->name }}" 
+                                             class="max-w-full max-h-full object-contain filter brightness-90 opacity-70 group-hover/card:brightness-100 group-hover/card:opacity-100 transition-all duration-500"
+                                             style="max-width: 120px; max-height: 80px;">
+                                    </div>
+                                    <div class="w-8 h-px bg-gradient-to-r from-transparent via-yellow-500/40 to-transparent mb-3 group-hover/card:via-yellow-500/80 transition-all duration-500"></div>
+                                    <h3 class="text-center text-gray-400 font-medium text-xs md:text-sm leading-tight group-hover/card:text-yellow-400 transition-colors duration-300 line-clamp-2">
+                                        {{ $member->name }}
+                                    </h3>
+                                    <div class="absolute inset-0 rounded-xl bg-gradient-to-b from-yellow-500/0 via-yellow-500/0 to-yellow-500/0 group-hover/card:from-yellow-500/5 group-hover/card:via-yellow-500/0 group-hover/card:to-yellow-500/5 transition-all duration-500 pointer-events-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
+            </div>
+
+            <!-- Minimal CTA -->
+            <div class="text-center">
+                <a href="#" class="group inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-yellow-500 text-black font-bold text-sm md:text-base rounded-lg hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
+                    <span>Jadi Partner Kami</span>
+                    <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <p class="text-gray-500 text-xs md:text-sm mt-4">Bergabunglah dengan ekosistem inovasi kami</p>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- CTA Section -->
+<!-- Smooth Scroll Animation -->
+<style>
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    
+    .animate-scroll {
+        animation: scroll 60s linear infinite;
+    }
+    
+    /* Line clamp utility */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+                <!-- CTA Section -->
     <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-black via-yellow-500/5 to-black"></div>
         

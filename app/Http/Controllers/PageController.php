@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Setting;
 use App\Models\Speaker;
-use App\Models\Committee; // <-- Tambahkan ini
+use App\Models\Committee;
 
 class PageController extends Controller
 {
@@ -16,13 +16,21 @@ class PageController extends Controller
     public function home(): View
     {
         $conferenceStartDate = Setting::where('key', 'conference_starts_date')->value('value');
+        $registrationClosesDate = Setting::where('key', 'registration_closes_date')->value('value');
 
-        // GANTI DATA DUMMY DENGAN QUERY KE DATABASE
-        $speakers = Speaker::latest()->get();
+        if (!$registrationClosesDate) {
+            $registrationClosesDate = $conferenceStartDate;
+        }
+
+        // PISAHKAN DATA JURI DAN SPEAKER
+        $juris = Speaker::where('type', 'juri')->latest()->get();
+        $narasumbers = Speaker::where('type', 'speaker')->latest()->get();
 
         return view('pages.home', [
             'conferenceStartDate' => $conferenceStartDate,
-            'speakers' => $speakers
+            'registrationClosesDate' => $registrationClosesDate,
+            'juris' => $juris,            // Kirim variabel juri
+            'narasumbers' => $narasumbers // Kirim variabel narasumber
         ]);
     }
 
@@ -60,19 +68,24 @@ class PageController extends Controller
      */
     public function submissionInfo(): View
     {
-        // Siapkan data untuk file template
-        // Path ini mengasumsikan Anda akan meletakkan file template di folder `public/templates/` 
+        // UPDATE: Link Google Docs & Slides
         $templates = [
             [
-                'name' => 'Template Proposal (.docx)',
-                'description' => 'Gunakan template ini untuk penulisan proposal penuh sesuai format standar LONTARA 2025.',
-                'url' => asset('templates/LONTARA2025_Paper_Template.docx'), // Contoh URL
-                'downloadable' => true // Kita bisa cek file exist jika perlu
+                'name' => 'Template Proposal - Early Stage',
+                'description' => 'Panduan dan template proposal untuk kategori Tahap Awal (Early Stage).',
+                'url' => 'https://docs.google.com/document/d/1BYNrSym2toc5QfPJGJP7TGs8Bp_EnB8U/edit',
+                'downloadable' => true
             ],
             [
-                'name' => 'Template Presentasi (.pptx)',
-                'description' => 'Template slide presentasi resmi untuk semua pemakalah yang diterima.',
-                'url' => asset('templates/LONTARA2025_Presentation_Template.pptx'), // Contoh URL
+                'name' => 'Template Proposal - Running Stage',
+                'description' => 'Panduan dan template proposal untuk kategori Tahap Berjalan (Running Stage).',
+                'url' => 'https://docs.google.com/document/d/1v9Wm4vOsquATiLyUdjd43Nl-w_yAkVjZ/edit',
+                'downloadable' => true
+            ],
+            [
+                'name' => 'Template Presentasi (PPT)',
+                'description' => 'Template slide presentasi resmi untuk semua peserta.',
+                'url' => 'https://docs.google.com/presentation/d/1wPOOtAUoUY3zOooNiMoBAX2_1bBTfj-L/edit?slide=id.p2#slide=id.p2',
                 'downloadable' => true
             ]
         ];

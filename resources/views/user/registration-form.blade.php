@@ -6,7 +6,8 @@
     </x-slot>
 
     <!-- Main Container with Dark Theme -->
-<div class="relative min-h-screen bg-black pt-10 pb-12 md:py-20 overflow-hidden"> 
+    <div class="relative min-h-screen bg-black pt-24 pb-12 md:pt-32 overflow-hidden">
+        
         <!-- Animated Background Effects -->
         <div class="absolute inset-0">
             <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
@@ -14,11 +15,19 @@
         </div>
         
         <!-- Glowing Orbs -->
-        <div class="absolute top-20 right-0 w-96 h-96 bg-yellow-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-20 left-0 w-96 h-96 bg-yellow-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute top-20 right-0 w-64 h-64 md:w-96 md:h-96 bg-yellow-500/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-20 left-0 w-64 h-64 md:w-96 md:h-96 bg-yellow-600/10 rounded-full blur-[80px] md:blur-[100px] pointer-events-none"></div>
 
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
+            <!-- Judul Halaman -->
+            <div class="text-center mb-8 md:mb-12">
+                <h2 class="font-black text-3xl md:text-4xl text-yellow-400 leading-tight uppercase tracking-widest drop-shadow-lg">
+                    {{ __('Formulir Pendaftaran Tim') }}
+                </h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mt-4 rounded-full"></div>
+            </div>
+
             <!-- Error Alert -->
             @if ($errors->any())
                 <div class="mb-8 p-4 bg-red-500/10 border-l-4 border-red-500 rounded-r-xl backdrop-blur-xl animate-fade-in-down" role="alert">
@@ -44,14 +53,14 @@
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
                     <div class="relative bg-gray-900 border border-yellow-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-xl">
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b border-yellow-500/10">
-                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30 flex-shrink-0">
                                 <span class="font-black text-yellow-400">01</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-100">Identitas Ketua & Tim</h3>
+                            <h3 class="text-lg md:text-xl font-bold text-gray-100">Identitas Ketua & Tim</h3>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Input Fields with Custom Styling -->
+                            <!-- Input Fields -->
                             <div class="space-y-2">
                                 <label for="team_name" class="block text-sm font-medium text-gray-400">Nama Tim</label>
                                 <input id="team_name" type="text" name="team_name" value="{{ old('team_name') }}" required autofocus 
@@ -92,19 +101,19 @@
                     </div>
                 </div>
 
-                <!-- SECTION 2: Data Anggota -->
-                <div class="group relative" x-data="{ 
+            <div class="group relative" x-data="{ 
                     members: [
-                        { name: '', nim: '', major: '' },
-                        { name: '', nim: '', major: '' }
+                        { name: '', nim: '', major: '' } 
                     ],
                     addMember() {
-                        if (this.members.length < 4) {
+                        // Maksimal 2 anggota tambahan (Total 3 orang termasuk ketua)
+                        if (this.members.length < 2) {
                             this.members.push({ name: '', nim: '', major: '' });
                         }
                     },
                     removeMember(index) {
-                        if (this.members.length > 2) {
+                        // Minimal 1 anggota tambahan (Total 2 orang termasuk ketua)
+                        if (this.members.length > 1) {
                             this.members.splice(index, 1);
                         }
                     }
@@ -113,28 +122,28 @@
                     <div class="relative bg-gray-900 border border-yellow-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-xl">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-yellow-500/10 gap-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30">
+                                <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30 flex-shrink-0">
                                     <span class="font-black text-yellow-400">02</span>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-100">Data Anggota Tim</h3>
-                                    <p class="text-xs text-gray-500 mt-1">Min. 2 anggota, Maks. 4 anggota (selain ketua)</p>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-100">Data Anggota Tim</h3>
+                                    <p class="text-xs text-gray-500 mt-1">Min. 1 anggota, Maks. 2 anggota (selain ketua). Total 2-3 orang.</p>
                                 </div>
                             </div>
-                            <button type="button" @click="addMember()" x-show="members.length < 4" 
-                                class="px-4 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 rounded-lg text-sm font-bold transition-all flex items-center gap-2">
+                            <button type="button" @click="addMember()" x-show="members.length < 2" 
+                                class="w-full sm:w-auto px-4 py-2 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-400 border border-yellow-500/50 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                                 Tambah Anggota
                             </button>
                         </div>
 
                         <template x-for="(member, index) in members" :key="index">
-                            <div class="relative bg-black/30 rounded-xl p-5 border border-gray-800 mb-4 transition-all hover:border-yellow-500/30">
+                            <div class="relative bg-black/30 rounded-xl p-5 border border-gray-800 mb-6 transition-all hover:border-yellow-500/30">
                                 <div class="absolute -top-3 left-4 bg-gray-800 border border-gray-700 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full">
                                     Anggota <span x-text="index + 1"></span>
                                 </div>
                                 
-                                <button type="button" @click="removeMember(index)" x-show="members.length > 2" 
+                                <button type="button" @click="removeMember(index)" x-show="members.length > 1" 
                                     class="absolute top-4 right-4 text-gray-500 hover:text-red-400 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                 </button>
@@ -160,16 +169,16 @@
                         </template>
                     </div>
                 </div>
-
+                
                 <!-- SECTION 3: Kategori Lomba -->
                 <div class="group relative">
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
                     <div class="relative bg-gray-900 border border-yellow-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-xl">
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b border-yellow-500/10">
-                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30 flex-shrink-0">
                                 <span class="font-black text-yellow-400">03</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-100">Detail Kompetisi</h3>
+                            <h3 class="text-lg md:text-xl font-bold text-gray-100">Detail Kompetisi</h3>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -200,11 +209,34 @@
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
                     <div class="relative bg-gray-900 border border-yellow-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-xl">
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b border-yellow-500/10">
-                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30 flex-shrink-0">
                                 <span class="font-black text-yellow-400">04</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-100">Upload Berkas (PDF)</h3>
+                            <h3 class="text-lg md:text-xl font-bold text-gray-100">Upload Berkas (PDF)</h3>
                         </div>
+
+                        <!-- ===== TOMBOL DOWNLOAD TEMPLATE (BARU) ===== -->
+                        <div class="mb-8 p-4 bg-yellow-500/5 rounded-xl border border-yellow-500/20">
+                            <p class="text-xs font-bold text-yellow-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                Link Template
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="https://docs.google.com/document/d/1BYNrSym2toc5QfPJGJP7TGs8Bp_EnB8U/edit" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
+                                    <span class="text-green-400">📄</span> Proposal Early Stage
+                                </a>
+                                <a href="https://docs.google.com/document/d/1v9Wm4vOsquATiLyUdjd43Nl-w_yAkVjZ/edit" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
+                                    <span class="text-blue-400">📄</span> Proposal Running Stage
+                                </a>
+                                <a href="https://docs.google.com/presentation/d/1wPOOtAUoUY3zOooNiMoBAX2_1bBTfj-L/edit?slide=id.p2#slide=id.p2" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
+                                    <span class="text-orange-400">📊</span> Template PPT
+                                </a>
+                                <a href="https://linktr.ee/lontaraperisaiumi" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
+                                    <span class="text-green-400">📄</span> Twibon, Caption, dan Sosial Media
+                                </a>
+                            </div>
+                        </div>
+                        <!-- ========================================== -->
 
                         <div class="grid grid-cols-1 gap-6">
                             @foreach([
@@ -236,20 +268,31 @@
                     <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500"></div>
                     <div class="relative bg-gray-900 border border-yellow-500/20 rounded-2xl p-6 md:p-8 backdrop-blur-xl">
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b border-yellow-500/10">
-                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center border border-yellow-500/30 flex-shrink-0">
                                 <span class="font-black text-yellow-400">05</span>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-100">Bukti Persyaratan</h3>
+                            <h3 class="text-lg md:text-xl font-bold text-gray-100">Bukti Persyaratan</h3>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             @foreach([
-                                'share_pamflet' => ['label' => 'Bukti Share Pamflet', 'desc' => 'Grup WA/Line (JPG/PNG)'],
-                                'twibbon' => ['label' => 'Bukti Upload Twibbon', 'desc' => 'Seluruh Anggota (JPG/PNG)'],
-                                'follow_medsos' => ['label' => 'Bukti Follow Medsos', 'desc' => 'IG & TikTok (JPG/PNG)']
+                                'share_pamflet' => ['label' => 'Bukti Share Pamflet', 'desc' => 'Grup WA (JPG/PNG/PDF)'],
+                                'twibbon' => ['label' => 'Bukti Upload Twibbon', 'desc' => 'Seluruh Anggota (JPG/PNG/PDF)'],
+                                'follow_medsos' => ['label' => 'Bukti Follow Medsos', 'desc' => 'IG dan TikTok (JPG/PNG/PDF)']
                             ] as $id => $data)
                                 <div class="relative">
-                                    <label class="block text-sm font-medium text-gray-400 mb-1">{{ $data['label'] }}</label>
+                                    <label class=" text-sm font-medium text-gray-400 mb-1 flex items-center justify-between">
+                                        {{ $data['label'] }}
+                                        
+                                        <!-- LINK TWIBBON KHUSUS -->
+                                        @if($id === 'twibbon')
+                                            <a href="https://linktr.ee/lontaraperisaiumi" target="_blank" class="text-xs text-yellow-400 hover:text-yellow-300 underline font-bold flex items-center gap-1">
+                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                                Get Twibbon
+                                            </a>
+                                        @endif
+                                        <!-- ===================== -->
+                                    </label>
                                     <p class="text-xs text-gray-500 mb-2">{{ $data['desc'] }}</p>
                                     <input type="file" id="{{ $id }}" name="{{ $id }}" accept=".jpg,.jpeg,.png,.pdf" required
                                         class="block w-full text-xs text-gray-400
@@ -285,7 +328,7 @@
                     </div>
 
                     <div class="flex items-center justify-end">
-                        <button type="submit" class="group relative inline-flex items-center justify-center gap-3 px-8 md:px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black text-lg rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg shadow-yellow-500/20">
+                        <button type="submit" class="group relative inline-flex items-center justify-center gap-3 px-8 md:px-12 py-4 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black text-lg rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 shadow-lg shadow-yellow-500/20 w-full md:w-auto">
                             <span class="relative z-10">KIRIM PENDAFTARAN</span>
                             <svg class="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
                             <div class="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

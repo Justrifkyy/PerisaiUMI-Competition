@@ -167,7 +167,7 @@
     </div>
 
     <!-- Struktur Proposal Section -->
-    <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
+    <div class="relative bg-black py-16 md:py-24 lg:py-1 overflow-hidden">
         <!-- Background Effects -->
         <div class="absolute inset-0">
             <div class="absolute top-1/4 right-1/4 w-96 h-96 md:w-[600px] md:h-[600px] bg-yellow-500 rounded-full blur-[200px] opacity-20"></div>
@@ -309,48 +309,51 @@
         </div>
     </div>
 
-    <!-- Format Nama File Section -->
-    <div class="relative bg-black py-16 md:py-20 lg:py-24 overflow-hidden">
+<div class="relative bg-black py-16 md:py-24 overflow-hidden border-t border-yellow-500/10">
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
-            <div class="max-w-5xl mx-auto">
-                <div class="relative group">
-                    <div class="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl md:rounded-[2rem] blur-xl md:blur-2xl opacity-40 animate-pulse"></div>
-                    <div class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 border-2 border-red-500/50 rounded-2xl md:rounded-[2rem] p-6 md:p-10 text-center backdrop-blur-xl">
-                        <div class="mb-4 md:mb-6">
-                            <div class="inline-flex p-3 md:p-4 bg-red-500/20 border border-red-500/40 rounded-xl md:rounded-2xl">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                                </svg>
+            <div class="max-w-4xl mx-auto">
+                <div class="group relative">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-all duration-700"></div>
+                    
+                    <div class="relative bg-gray-900 border border-yellow-500/30 rounded-2xl p-8 md:p-12 text-center backdrop-blur-xl">
+                        
+                        <div class="inline-flex p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-2xl mb-6 shadow-[0_0_15px_rgba(234,179,8,0.2)]">
+                            <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-2xl md:text-3xl font-black text-white mb-4">
+                            Format Penamaan File <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600">PDF</span>
+                        </h3>
+                        
+                        <p class="text-gray-400 mb-8 max-w-lg mx-auto text-sm md:text-base leading-relaxed">
+                            Pastikan file proposal Anda disimpan dengan format penamaan berikut sebelum diunggah ke sistem:
+                        </p>
+
+                        <div class="relative group/code mx-auto max-w-2xl">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-yellow-500/50 to-yellow-600/50 rounded-xl blur opacity-20 transition duration-500"></div>
+                            <div class="relative bg-black border border-gray-800 rounded-xl px-6 py-5 flex items-center justify-center overflow-x-auto shadow-inner">
+                                <code class="font-mono text-sm md:text-lg text-yellow-400 whitespace-nowrap tracking-wide">
+                                    LONTARA2025_Nama Ketua_Nama PT/Tim_Judul Karya
+                                </code>
                             </div>
                         </div>
-                        
-                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black text-red-400 mb-3 md:mb-4">Format Nama File</h3>
-                        <p class="text-sm md:text-base lg:text-lg text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto">
-                            Pastikan nama file proposal PDF Anda sesuai dengan format berikut:
-                        </p>
-                        
-                        <div class="inline-block bg-black/50 border border-red-500/30 rounded-xl md:rounded-2xl px-4 py-3 md:px-6 md:py-4 mb-4 md:mb-6 max-w-full overflow-x-auto">
-                            <code class="text-sm sm:text-base md:text-lg lg:text-xl font-mono text-yellow-400 whitespace-nowrap block">
-                                LONTARA2025_Nama Ketua_Nama PT/Tim_Judul Karya
-                            </code>
-                        </div>
-                        
-                        <div class="inline-flex items-start gap-2 px-4 py-2 md:px-5 md:py-3 bg-orange-500/10 border border-orange-500/30 rounded-lg md:rounded-xl max-w-full">
-                            <svg class="w-4 h-4 md:w-5 md:h-5 text-orange-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                        <div class="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
+                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <p class="text-xs md:text-sm text-gray-400 text-left">
-                                Judul karya maksimal 3 kata. Tidak boleh ada tanda titik (.) dalam nama file.
-                            </p>
+                            <p>Catatan: Judul karya maksimal 20 kata.</p>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Download Template Section -->
-    <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
+    <div class="relative bg-black py-16 md:py-24 lg:py-5 overflow-hidden ">
         <!-- Background Effects -->
         <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(234, 179, 8, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 179, 8, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
 
@@ -374,14 +377,12 @@
                     </p>
                 </div>
 
-                <!-- Template Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8">
                     @foreach($templates as $template)
-                    <div class="group relative">
+                    <div class="group relative w-full md:max-w-[48%] flex-grow-0">
                         <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl md:rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-30 transition-all duration-700"></div>
                         
                         <div class="relative h-full bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-yellow-500/30 rounded-2xl md:rounded-[2rem] p-6 md:p-8 backdrop-blur-xl hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between">
-                            <!-- Icon -->
                             <div class="mb-4 md:mb-6">
                                 <div class="inline-flex p-3 md:p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl md:rounded-2xl">
                                     <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -396,7 +397,7 @@
                             </div>
 
                             @if($template['downloadable'])
-                                <a href="{{ $template['url'] }}" download class="group/btn relative inline-flex items-center justify-center w-full gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-sm md:text-base lg:text-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 shadow-xl shadow-yellow-500/50">
+                                <a href="{{ $template['url'] }}" target="_blank" class="group/btn relative inline-flex items-center justify-center w-full gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-sm md:text-base lg:text-lg rounded-xl overflow-hidden hover:scale-105 transition-transform duration-300 shadow-xl shadow-yellow-500/50">
                                     <span class="relative z-10">Unduh Template</span>
                                     <svg class="w-4 h-4 md:w-5 md:h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>

@@ -70,10 +70,16 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     Route::get('/registrations/{id}', [AdminDashboardController::class, 'show'])->name('registrations.show');
     Route::post('/registrations/{id}/verify-payment', [AdminDashboardController::class, 'verifyPayment'])->name('registrations.verify-payment');
 
-    // Manajemen Peserta
+
+    // Manajemen Peserta (Manual Route CRUD)
     Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
-    Route::get('/participants/export', [ParticipantController::class, 'export'])->name('participants.export');
+    Route::get('/participants/export', [ParticipantController::class, 'export'])->name('participants.export'); // Export WAJIB sebelum parameter {registration}
     Route::get('/participants/{registration}', [ParticipantController::class, 'show'])->name('participants.show');
+    Route::get('/participants/{registration}/edit', [ParticipantController::class, 'edit'])->name('participants.edit');
+    Route::patch('/participants/{registration}', [ParticipantController::class, 'update'])->name('participants.update');
+    Route::delete('/participants/{registration}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
+
+
 
     // Manajemen Paper
     Route::get('/papers', [PaperController::class, 'index'])->name('papers.index');

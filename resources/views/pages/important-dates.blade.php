@@ -9,7 +9,7 @@
         <div class="absolute bottom-1/4 right-1/4 w-80 h-80 md:w-[500px] md:h-[500px] bg-yellow-400 rounded-full blur-[150px] opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 md:w-[600px] md:h-[600px] bg-yellow-600 rounded-full blur-[200px] opacity-10 animate-pulse" style="animation-delay: 2s;"></div>
 
-        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+        <div class="container mx-auto px-4 sm:px-6 py-5 relative z-10">
             <div class="max-w-5xl mx-auto text-center space-y-6 md:space-y-8 py-12 md:py-0">
                 <div class="inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-yellow-500/20 to-yellow-400/20 backdrop-blur-xl border border-yellow-500/50 rounded-full">
                     <svg class="w-4 h-4 md:w-5 md:h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@
     </div>
 
     <!-- Timeline Section -->
-    <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
+    <div class="relative bg-black py-16 md:py-24 lg:py-10 overflow-hidden">
         <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 2px 2px, rgb(234, 179, 8) 1px, transparent 0); background-size: 50px 50px;"></div>
         
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
@@ -178,8 +178,7 @@
     </div>
 
     
-    <!-- Rundown Section -->
-    <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
+<div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute top-1/4 right-1/4 w-96 h-96 md:w-[600px] md:h-[600px] bg-yellow-500 rounded-full blur-[200px] opacity-20"></div>
             <div class="absolute bottom-1/4 left-1/4 w-80 h-80 md:w-[500px] md:h-[500px] bg-yellow-400 rounded-full blur-[150px] opacity-20"></div>
@@ -202,7 +201,6 @@
                 </div>
 
                 <div class="space-y-8 md:space-y-12">
-                    <!-- Day 1 -->
                     <div class="group relative">
                         <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl md:rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-40 transition-all duration-700"></div>
                         
@@ -217,15 +215,15 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-blue-400 mb-1">Hari Pertama: Persiapan</h3>
-                                            <p class="text-gray-300 text-sm md:text-lg">Minggu, 12 Januari 2025</p>
+                                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-blue-400 mb-1">Ignite the Vision</h3>
+                                            <p class="text-gray-300 text-sm md:text-lg">Jumat, 12 Januari 2026</p>
                                         </div>
                                     </div>
                                     <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-blue-500/30 border border-blue-400/50 rounded-full">
                                         <svg class="w-4 h-4 md:w-5 md:h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                         </svg>
-                                        <span class="text-blue-400 font-bold text-xs md:text-sm">Setup Day</span>
+                                        <span class="text-blue-400 font-bold text-xs md:text-sm">Opening & Bootcamp</span>
                                     </div>
                                 </div>
                             </div>
@@ -234,40 +232,42 @@
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-blue-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-blue-500/20 border border-blue-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-blue-400">08.00 - 09.00</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-blue-400">07.30 - 08.40</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Registrasi Peserta & Pengambilan ID Card</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Registrasi, Networking & Opening Ceremony</p>
+                                        <p class="text-sm text-gray-400 mt-1">Pembukaan resmi LONTARA 2025 dan sambutan tokoh kampus.</p>
                                     </div>
                                 </div>
 
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-blue-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-blue-500/20 border border-blue-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-blue-400">09.00 - 10.00</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-blue-400">09.30 - 11.30</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Technical Meeting & Penjelasan Mekanisme</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Bootcamp Session 1: Green Startup Mindset</p>
+                                        <p class="text-sm text-gray-400 mt-1">Sesi inspiratif tentang ide bisnis berkelanjutan.</p>
                                     </div>
                                 </div>
 
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-blue-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-blue-500/20 border border-blue-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-blue-400">10.00 - 16.00</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-blue-400">13.00 - 15.00</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Dekorasi dan Penataan Booth Peserta</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Bootcamp Session 2: Pitching & Strategy</p>
+                                        <p class="text-sm text-gray-400 mt-1">Pembekalan strategi branding dan presentasi.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Day 2 -->
                     <div class="group relative">
                         <div class="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl md:rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-40 transition-all duration-700"></div>
                         
@@ -282,13 +282,13 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-yellow-400 mb-1">Hari Kedua: Opening & Presentasi</h3>
-                                            <p class="text-gray-300 text-sm md:text-lg">Senin, 13 Januari 2025</p>
+                                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-yellow-400 mb-1">Build & Showcase</h3>
+                                            <p class="text-gray-300 text-sm md:text-lg">Sabtu, 13 Januari 2026</p>
                                         </div>
                                     </div>
                                     <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500/30 border border-yellow-400/50 rounded-full">
                                         <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-                                        <span class="text-yellow-400 font-bold text-xs md:text-sm">Main Event</span>
+                                        <span class="text-yellow-400 font-bold text-xs md:text-sm">Pitching & Expo</span>
                                     </div>
                                 </div>
                             </div>
@@ -297,11 +297,11 @@
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-yellow-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500/20 border border-yellow-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-yellow-400">08.00 - 09.30</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-yellow-400">08.00 - 09.00</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Pembukaan Acara & Sambutan Rektor UMI</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Booth Preparation & Opening Expo</p>
                                     </div>
                                 </div>
 
@@ -310,7 +310,7 @@
                                     <div class="relative flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-yellow-500/20 to-yellow-400/10 rounded-xl border-2 border-yellow-500/50">
                                         <div class="flex-shrink-0">
                                             <div class="px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500/40 border border-yellow-400/60 rounded-lg">
-                                                <span class="font-mono text-xs md:text-sm font-bold text-black">10.00 - 11.30</span>
+                                                <span class="font-mono text-xs md:text-sm font-bold text-black">09.00 - 12.00</span>
                                             </div>
                                         </div>
                                         <div class="flex-1">
@@ -320,7 +320,7 @@
                                                 </svg>
                                                 <span class="text-black font-bold text-xs uppercase tracking-wider">Featured</span>
                                             </div>
-                                            <p class="text-lg md:text-xl font-black text-black">Talkshow: "Green Tech Revolution"</p>
+                                            <p class="text-lg md:text-xl font-black text-black">Pitching Session: Early Stage (Batch 1)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -328,29 +328,28 @@
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-yellow-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500/20 border border-yellow-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-yellow-400">13.00 - 16.00</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-yellow-400">13.00 - 15.30</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Sesi Presentasi Bisnis (Pitching) Tim 1-10</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Pitching Session: Running Stage (Batch 2)</p>
                                     </div>
                                 </div>
 
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-yellow-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-yellow-500/20 border border-yellow-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-yellow-400">16.00 - 16.30</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-yellow-400">15.30 - 17.00</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Penjurian Langsung di Booth (In-Tenant Judging)</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Open Expo for Public & Media Visit</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Day 3 -->
                     <div class="group relative">
                         <div class="absolute -inset-1 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl md:rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-40 transition-all duration-700"></div>
                         
@@ -365,15 +364,15 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-purple-400 mb-1">Hari Ketiga: Awarding & Closing</h3>
-                                            <p class="text-gray-300 text-sm md:text-lg">Selasa, 14 Januari 2025</p>
+                                            <h3 class="text-xl sm:text-2xl md:text-3xl font-black text-purple-400 mb-1">Celebrate the Change</h3>
+                                            <p class="text-gray-300 text-sm md:text-lg">Minggu, 14 Januari 2026</p>
                                         </div>
                                     </div>
                                     <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-purple-500/30 border border-purple-400/50 rounded-full">
                                         <svg class="w-4 h-4 md:w-5 md:h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                                         </svg>
-                                        <span class="text-purple-400 font-bold text-xs md:text-sm">Grand Finale</span>
+                                        <span class="text-purple-400 font-bold text-xs md:text-sm">Expo & Awarding</span>
                                     </div>
                                 </div>
                             </div>
@@ -382,11 +381,24 @@
                                 <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-purple-500/40 transition-all duration-300">
                                     <div class="flex-shrink-0">
                                         <div class="px-3 md:px-4 py-1.5 md:py-2 bg-purple-500/20 border border-purple-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-purple-400">08.05 - 08.30</span>
+                                            <span class="font-mono text-xs md:text-sm font-bold text-purple-400">09.00 - 11.30</span>
                                         </div>
                                     </div>
                                     <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Penampilan Spesial UKM Seni UMI</p>
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Green Tech Expo</p>
+                                        <p class="text-sm text-gray-400 mt-1">Pameran produk dan interaksi publik.</p>
+                                    </div>
+                                </div>
+
+                                <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-purple-500/40 transition-all duration-300">
+                                    <div class="flex-shrink-0">
+                                        <div class="px-3 md:px-4 py-1.5 md:py-2 bg-purple-500/20 border border-purple-500/40 rounded-lg">
+                                            <span class="font-mono text-xs md:text-sm font-bold text-purple-400">12.30 - 14.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-base md:text-lg font-semibold text-gray-200">Creative Performance Session</p>
+                                        <p class="text-sm text-gray-400 mt-1">Penampilan UKM kampus & showcase kreativitas.</p>
                                     </div>
                                 </div>
 
@@ -395,29 +407,18 @@
                                     <div class="relative flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-purple-500/20 to-purple-400/10 rounded-xl border-2 border-purple-500/50">
                                         <div class="flex-shrink-0">
                                             <div class="px-3 md:px-4 py-1.5 md:py-2 bg-purple-500/40 border border-purple-400/60 rounded-lg">
-                                                <span class="font-mono text-xs md:text-sm font-bold text-white">09.00 - 09.45</span>
+                                                <span class="font-mono text-xs md:text-sm font-bold text-white">14.00 - 15.30</span>
                                             </div>
                                         </div>
                                         <div class="flex-1">
                                             <div class="flex items-center gap-2 md:gap-3 mb-2">
                                                 <svg class="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                                                 </svg>
                                                 <span class="text-white font-bold text-xs uppercase tracking-wider">Grand Prize</span>
                                             </div>
-                                            <p class="text-lg md:text-xl font-black text-white">Pengumuman Juara & Penyerahan Hadiah</p>
+                                            <p class="text-lg md:text-xl font-black text-white">Awarding & Closing Ceremony</p>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="group/schedule flex flex-col sm:flex-row items-start gap-3 md:gap-6 p-4 md:p-5 bg-gradient-to-r from-gray-800/50 to-transparent rounded-xl border border-gray-700/30 hover:border-purple-500/40 transition-all duration-300">
-                                    <div class="flex-shrink-0">
-                                        <div class="px-3 md:px-4 py-1.5 md:py-2 bg-purple-500/20 border border-purple-500/40 rounded-lg">
-                                            <span class="font-mono text-xs md:text-sm font-bold text-purple-400">11.30 - 12.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-base md:text-lg font-semibold text-gray-200">Penutupan LONTARA 2025 & Farewell</p>
                                     </div>
                                 </div>
                             </div>
@@ -428,8 +429,10 @@
         </div>
     </div>
 
+
+
     <!-- CTA Section -->
-    <div class="relative bg-black py-16 md:py-24 lg:py-32 overflow-hidden">
+    <div class="relative bg-black py-16 md:py-24 lg:py-1 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-black via-yellow-500/5 to-black"></div>
         <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(234, 179, 8, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 179, 8, 0.2) 1px, transparent 1px); background-size: 50px 50px;"></div>
         

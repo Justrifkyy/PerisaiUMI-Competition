@@ -1,6 +1,6 @@
 <x-admin-layout>
     <x-slot name="header">
-        Edit Data Dewan Juri
+        Edit Data Tokoh
     </x-slot>
 
     <div class="p-6 bg-white rounded-lg shadow-md">
@@ -10,6 +10,15 @@
             <input type="hidden" name="crop_data" id="crop_data">
 
             <div class="space-y-6">
+                {{-- Pilihan Tipe --}}
+                <div>
+                    <x-input-label for="type" value="Kategori Tokoh" />
+                    <select id="type" name="type" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                        <option value="juri" {{ $speaker->type == 'juri' ? 'selected' : '' }}>Dewan Juri</option>
+                        <option value="speaker" {{ $speaker->type == 'speaker' ? 'selected' : '' }}>Narasumber Talkshow</option>
+                    </select>
+                </div>
+
                 {{-- Nama --}}
                 <div>
                     <x-input-label for="name" value="Nama Lengkap" />
@@ -24,12 +33,11 @@
 
                 {{-- Foto --}}
                 <div>
-                    <x-input-label value="Foto Juri (Biarkan jika tidak ingin mengubah)" />
+                    <x-input-label value="Foto (Biarkan jika tidak ubah)" />
                     <div class="mt-2 flex items-center gap-x-4">
                         <div class="h-32 w-32 rounded-full overflow-hidden border-2 border-gray-300 bg-gray-100 flex-shrink-0">
                             <img id="image-preview" class="h-full w-full object-cover" src="{{ Storage::url($speaker->image_path) }}" alt="Preview">
                         </div>
-                        
                         <div>
                             <input type="file" id="image-input" class="hidden" accept="image/*">
                             <label for="image-input" class="cursor-pointer inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 transition">
@@ -47,6 +55,7 @@
         </form>
     </div>
 
+    <!-- MODAL CROPPER (Sama seperti create) -->
     <div id="cropper-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4" style="display: none;">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
             <div class="px-6 py-4 border-b flex justify-between items-center">

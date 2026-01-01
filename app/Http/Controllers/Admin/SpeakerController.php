@@ -35,19 +35,20 @@ class SpeakerController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'crop_data' => 'required|string', // Validasi data base64
+            'type' => 'required|in:juri,speaker', // Validasi Tipe
+            'crop_data' => 'required|string',
         ]);
 
-        // Decode dan simpan gambar
         $path = $this->saveCroppedImage($validated['crop_data']);
 
         Speaker::create([
             'name' => $validated['name'],
             'title' => $validated['title'],
+            'type' => $validated['type'], // Simpan Tipe
             'image_path' => $path,
         ]);
 
-        return redirect()->route('admin.speakers.index')->with('success', 'Speaker berhasil ditambahkan.');
+        return redirect()->route('admin.speakers.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
     /**
@@ -66,24 +67,24 @@ class SpeakerController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
-            'crop_data' => 'nullable|string', // Opsional
+            'type' => 'required|in:juri,speaker', // Validasi Tipe
+            'crop_data' => 'nullable|string',
         ]);
 
         $path = $speaker->image_path;
         if ($request->filled('crop_data')) {
-            // Hapus gambar lama
             Storage::delete($speaker->image_path);
-            // Simpan gambar baru
             $path = $this->saveCroppedImage($validated['crop_data']);
         }
 
         $speaker->update([
             'name' => $validated['name'],
             'title' => $validated['title'],
+            'type' => $validated['type'], // Update Tipe
             'image_path' => $path,
         ]);
 
-        return redirect()->route('admin.speakers.index')->with('success', 'Data speaker berhasil diperbarui.');
+        return redirect()->route('admin.speakers.index')->with('success', 'Data berhasil diperbarui.');
     }
 
     /**
@@ -93,7 +94,7 @@ class SpeakerController extends Controller
     {
         Storage::delete($speaker->image_path);
         $speaker->delete();
-        return redirect()->route('admin.speakers.index')->with('success', 'Speaker berhasil dihapus.');
+        return redirect()->route('admin.speakers.index')->with('success', 'Data berhasil dihapus.');
     }
 
     /**

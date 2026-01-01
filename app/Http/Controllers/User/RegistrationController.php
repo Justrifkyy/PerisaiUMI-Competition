@@ -66,8 +66,8 @@ class RegistrationController extends Controller
             'nim' => 'required|string|max:50',
             'major' => 'required|string|max:255',
 
-            // Data Anggota (Array)
-            'members' => 'required|array|min:2|max:4',
+            // Data Anggota (Array) -> UPDATE DISINI (2-3 orang total = 1-2 anggota)
+            'members' => 'required|array|min:1|max:2',
             'members.*.name' => 'required|string|max:255',
             'members.*.nim' => 'required|string|max:50',
             'members.*.major' => 'required|string|max:255',
@@ -101,28 +101,19 @@ class RegistrationController extends Controller
             'team_name' => $validated['team_name'],
             'full_name' => $validated['full_name'], // Ketua
             'institution' => $validated['institution'],
-
-            // --- PERBAIKAN UTAMA: Masukkan Position secara Hardcode ---
             'position' => 'Ketua Tim',
-            // ---------------------------------------------------------
-
             'phone_number' => $validated['phone_number'],
             'participant_type' => $validated['participant_type'],
             'research_field' => $validated['research_field'],
-
-            // Simpan NIM & Major Ketua (Dari input, bukan Auth::user)
             'nim' => $validated['nim'],
             'major' => $validated['major'],
-
-            // Path File
             'ktm_path' => $ktmPath,
             'bmc_path' => $bmcPath,
             'proposal_path' => $proposalPath,
             'share_pamflet_path' => $sharePath,
             'twibbon_path' => $twibbonPath,
             'follow_medsos_path' => $followPath,
-
-            'package_choice' => 'Lomba Kewirausahaan', // Hardcode
+            'package_choice' => 'Lomba Kewirausahaan',
             'is_present' => true,
             'agree_terms' => true,
         ]);
