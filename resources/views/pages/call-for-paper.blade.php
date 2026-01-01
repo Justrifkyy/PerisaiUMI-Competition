@@ -256,8 +256,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 mb-2 md:mb-3">Tim 3-5 Orang</h3>
-                                    <p class="text-sm md:text-base text-gray-300 leading-relaxed">Satu tim terdiri dari 3 hingga 5 mahasiswa. Boleh lintas jurusan dalam satu kampus.</p>
+                                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 mb-2 md:mb-3">Tim 2-3 Orang</h3>
+                                    <p class="text-sm md:text-base text-gray-300 leading-relaxed">Satu tim terdiri dari 2 hingga 3 mahasiswa. Boleh lintas jurusan dalam satu kampus.</p>
                                 </div>
                             </div>
                         </div>
