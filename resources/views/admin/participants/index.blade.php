@@ -15,7 +15,7 @@
             <h2 class="text-xl font-semibold text-gray-800">Daftar Tim Terdaftar</h2>
         </div>
 
-        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+        <div class="bg-gray-50 p-10 rounded-lg border border-gray-200 mb-10">
             <form method="GET" action="{{ route('admin.participants.index') }}" class="flex flex-col md:flex-row gap-4 items-end">
                 <div class="flex-grow w-full">
                     <label for="search" class="block text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">Cari Data</label>
