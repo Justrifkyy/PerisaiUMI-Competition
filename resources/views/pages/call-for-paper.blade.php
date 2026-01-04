@@ -277,8 +277,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 mb-2 md:mb-3">Karya Orisinal</h3>
-                                    <p class="text-sm md:text-base text-gray-300 leading-relaxed">Ide bisnis belum pernah memenangkan kompetisi sejenis dan bebas plagiarisme.</p>
+                                    <h3 class="text-xl md:text-2xl font-black text-yellow-400 mb-2 md:mb-3">Karya Menarik</h3>
+                                    <p class="text-sm md:text-base text-gray-300 leading-relaxed">Karya menarik berpotensi nilai unik dan kelayakan bisnis Anda secara meyakinkan dan berbasis data.</p>
                                 </div>
                             </div>
                         </div>

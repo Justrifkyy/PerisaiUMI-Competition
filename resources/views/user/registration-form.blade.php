@@ -222,12 +222,6 @@
                                 Link Template
                             </p>
                             <div class="flex flex-wrap gap-3">
-                                <a href="https://docs.google.com/document/d/1BYNrSym2toc5QfPJGJP7TGs8Bp_EnB8U/edit" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
-                                    <span class="text-green-400">📄</span> Proposal Early Stage
-                                </a>
-                                <a href="https://docs.google.com/document/d/1v9Wm4vOsquATiLyUdjd43Nl-w_yAkVjZ/edit" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
-                                    <span class="text-blue-400">📄</span> Proposal Running Stage
-                                </a>
                                 <a href="https://docs.google.com/presentation/d/1wPOOtAUoUY3zOooNiMoBAX2_1bBTfj-L/edit?slide=id.p2#slide=id.p2" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-medium border border-gray-700 transition-colors">
                                     <span class="text-orange-400">📊</span> Template PPT
                                 </a>
