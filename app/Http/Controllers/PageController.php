@@ -71,18 +71,6 @@ class PageController extends Controller
         // UPDATE: Link Google Docs & Slides
         $templates = [
             [
-                'name' => 'Template Proposal - Early Stage',
-                'description' => 'Panduan dan template proposal untuk kategori Tahap Awal (Early Stage).',
-                'url' => 'https://docs.google.com/document/d/1BYNrSym2toc5QfPJGJP7TGs8Bp_EnB8U/edit',
-                'downloadable' => true
-            ],
-            [
-                'name' => 'Template Proposal - Running Stage',
-                'description' => 'Panduan dan template proposal untuk kategori Tahap Berjalan (Running Stage).',
-                'url' => 'https://docs.google.com/document/d/1v9Wm4vOsquATiLyUdjd43Nl-w_yAkVjZ/edit',
-                'downloadable' => true
-            ],
-            [
                 'name' => 'Template Presentasi (PPT)',
                 'description' => 'Template slide presentasi resmi untuk semua peserta.',
                 'url' => 'https://docs.google.com/presentation/d/1wPOOtAUoUY3zOooNiMoBAX2_1bBTfj-L/edit?slide=id.p2#slide=id.p2',
