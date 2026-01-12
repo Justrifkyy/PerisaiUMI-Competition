@@ -76,4 +76,10 @@ class User extends Authenticatable
     {
         return $this->role === 2;
     }
+
+    // app/Models/User.php
+    public function judgeScores()
+    {
+        return $this->hasMany(Score::class, 'user_id');
+    }
 }

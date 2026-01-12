@@ -49,7 +49,7 @@ class Registration extends Model
     }
 
     // Relasi ke Penilaian (Scores)
-    public function scores(): HasMany
+    public function scores()
     {
         return $this->hasMany(Score::class);
     }
@@ -58,5 +58,10 @@ class Registration extends Model
     public function teamMembers(): HasMany
     {
         return $this->hasMany(TeamMember::class);
+    }
+
+    public function getAverageScore($type)
+    {
+        return $this->scores()->where('type', $type)->avg('total_score') ?? 0;
     }
 }
