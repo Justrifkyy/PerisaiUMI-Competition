@@ -74,6 +74,12 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     // Manajemen Peserta (Manual Route CRUD)
     Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
     Route::get('/participants/export', [ParticipantController::class, 'export'])->name('participants.export'); // Export WAJIB sebelum parameter {registration}
+
+    // Route Baru untuk Toggle Finalis
+    Route::patch('/participants/{registration}/toggle-finalist', [ParticipantController::class, 'toggleFinalist'])
+        ->name('participants.toggle-finalist');
+
+
     Route::get('/participants/{registration}', [ParticipantController::class, 'show'])->name('participants.show');
     Route::get('/participants/{registration}/edit', [ParticipantController::class, 'edit'])->name('participants.edit');
     Route::patch('/participants/{registration}', [ParticipantController::class, 'update'])->name('participants.update');
